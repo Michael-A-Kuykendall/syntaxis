@@ -1,5 +1,7 @@
 # Syntaxis
 
+![Syntlogo](https://raw.githubusercontent.com/Michael-A-Kuykendall/syntaxis/main/assets/syntaxis--logo.png)
+
 Deterministic, offline English structural analysis. Rust, **zero dependencies** —
 no model weights, no Python, no C++, no network, no wall-clock, no RNG.
 
