@@ -1,0 +1,27 @@
+# sent_id = 1
+# text = The cat are sleeping.
+1	The	the	DET	DT	PronType=Art	2	det	_	_
+2	cat	cat	NOUN	NN	Number=Sing	4	nsubj	_	_
+3	are	be	AUX	VBP	Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	aux	_	_
+4	sleeping	sleep	VERB	VBG	Tense=Pres|VerbForm=Part	0	root	_	SpaceAfter=No
+5	.	.	PUNCT	.	_	4	punct	_	_
+
+# sent_id = 2
+# text = There is many reasons.
+1	There	there	PRON	EX	_	4	expl	_	ArcStatus=unsupported
+2	is	be	AUX	VBZ	Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
+3	many	many	ADJ	JJ	Degree=Pos	4	amod	_	_
+4	reasons	reason	NOUN	NNS	Number=Plur	0	root	_	SpaceAfter=No
+5	.	.	PUNCT	.	_	4	punct	_	_
+
+# sent_id = 3
+# text = Each of the students have a book.
+1	Each	each	PRON	DT	Number=Sing|PronType=Tot	5	nsubj	_	_
+2	of	of	ADP	IN	_	1	prep	_	_
+3	the	the	DET	DT	PronType=Art	4	det	_	_
+4	students	student	NOUN	NNS	Number=Plur	2	pobj	_	_
+5	have	have	VERB	VBP	Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+6	a	a	DET	DT	PronType=Art	7	det	_	_
+7	book	book	NOUN	NN	Number=Sing	5	obj	_	SpaceAfter=No
+8	.	.	PUNCT	.	_	5	punct	_	_
+

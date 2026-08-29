@@ -1,0 +1,13 @@
+# artifact: en.fused
+# version: 0.1.0
+# license: Apache-2.0
+# source: original; Penn Treebank convention.
+# policy: <surface><TAB><part>|<part>... matched case-insensitively against a
+#   whole word core. The parts must concatenate to the surface exactly; the
+#   loader rejects the artifact otherwise, which keeps token spans exact.
+cannot	can|not
+gonna	gon|na
+gotta	got|ta
+wanna	wan|na
+lemme	lem|me
+gimme	gim|me

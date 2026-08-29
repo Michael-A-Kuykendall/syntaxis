@@ -1,0 +1,16 @@
+[package]
+name = "engine-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Offline command line front end for the Syntaxis workspace."
+
+[[bin]]
+name = "english-engine"
+path = "src/main.rs"
+
+[dependencies]
+parser-core = { path = "../parser-core" }
+english-rules = { path = "../english-rules" }
+conllu = { path = "../conllu" }

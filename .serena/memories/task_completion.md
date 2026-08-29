@@ -1,0 +1,1 @@
+For Rust changes, run `cargo fmt --all -- --check`, `cargo check --all-targets`, `cargo test --all-targets`, and `cargo clippy --all-targets --all-features -- -D warnings`. For M0 bootstrap, all 71 tests should pass and canonical CoNLL-U round-trip must remain green. Run `serena memories check` after onboarding memory changes.

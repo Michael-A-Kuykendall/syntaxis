@@ -1,0 +1,11 @@
+[package]
+name = "conllu"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Strict CoNLL-U import and export for the Syntaxis analysis model."
+
+[dependencies]
+parser-core = { path = "../parser-core" }
+english-rules = { path = "../english-rules" }

@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/parser-core",
+    "crates/english-rules",
+    "crates/conllu",
+    "crates/engine-cli",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+license = "Apache-2.0"
+
+# Determinism contract: this workspace has no external dependencies at all.
+# Every dependency added later must be justified in docs/RESOURCES.md and must
+# not introduce network access, model weights, wall-clock, or RNG.
+[profile.release]
+overflow-checks = true

@@ -1,0 +1,156 @@
+# english-engine rule pack manifest
+#
+# Format (frozen at M0): INI-like. `[section]` opens a section, `key = value`
+# sets a field, `#` starts a comment. Values run to end of line and are
+# trimmed. No includes, no interpolation, no conditionals: a rule pack must be
+# readable without executing anything.
+#
+# Every artifact below is embedded in the binary at build time and verified
+# against its checksum at load. `path` is provenance, not a runtime lookup, so
+# the engine stays offline and WASM-capable.
+
+[pack]
+id = en-core
+version = 0.1.0
+dialect = en-US
+analysis_version = 0.1.0
+conllu_mapping_version = 0.1.0
+description = M0 surface layer: segmentation and tokenization only.
+
+[artifact.abbreviations]
+path = resources/en/abbreviations.txt
+version = 0.1.0
+license = Apache-2.0
+source = original
+normalization = none; matched byte-exact against the token surface
+generation = hand maintained
+sha256 = c9dc7aee4fc3bbbb7c0d675ef15da450df6d67f64eae3c0b2dddab9e590e2714
+
+[artifact.clitics]
+path = resources/en/clitics.txt
+version = 0.1.0
+license = Apache-2.0
+source = original
+normalization = ASCII lowercase before match; curly apostrophe folded to '
+generation = hand maintained
+sha256 = d1a9e3964690ba7165ea3d1bd51d56119ba2525e0fdd7d1c33712dedd5f35fec
+
+[artifact.fused]
+path = resources/en/fused.txt
+version = 0.1.0
+license = Apache-2.0
+source = original
+normalization = ASCII lowercase before match
+generation = hand maintained
+sha256 = a21f50f90a53639bc2d5e250226fe350d34997322062acb5af4185938a75bf56
+
+# --- segmentation ----------------------------------------------------------
+
+[rule.SEG.BREAK.TERMINAL]
+stage = segment
+description = Break after . ! ? or an ellipsis when the next non-space character can open a sentence.
+supports = Sentence-final punctuation followed by an uppercase letter, digit, opening quote, or opening bracket.
+blind_spots = Sentences opening with an uncapitalized word are not split; a following lowercase letter is treated as continuation.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.SEG.BREAK.PARAGRAPH]
+stage = segment
+description = Break at a blank line even when no terminal punctuation is present.
+supports = Headings, list items, and unpunctuated fragments separated by blank lines.
+blind_spots = Single-newline line breaks inside a wrapped paragraph are not breaks.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.SEG.NOBREAK.ABBREVIATION]
+stage = segment
+description = Suppress a break when the period belongs to a known abbreviation.
+supports = Entries in the en.abbreviations artifact.
+blind_spots = An abbreviation that genuinely ends a sentence is not split; unknown abbreviations split wrongly.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.SEG.NOBREAK.INITIAL]
+stage = segment
+description = Suppress a break after a single-letter initial such as J. or R.
+supports = Personal name initials.
+blind_spots = A one-letter word genuinely ending a sentence is not split.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.SEG.NOBREAK.NUMERIC]
+stage = segment
+description = Suppress a break when the period sits between digits.
+supports = Decimals and dotted version numbers.
+blind_spots = None known.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+# --- tokenization ----------------------------------------------------------
+
+[rule.TOK.WORD]
+stage = tokenize
+description = Emit a maximal run of letters, digits, and word-internal punctuation as one token.
+supports = Ordinary words, decimals, and digit-grouped numbers.
+blind_spots = URLs and email addresses are emitted as single opaque tokens.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.TOK.PUNCT.LEADING]
+stage = tokenize
+description = Split opening quotes and brackets off the front of a chunk.
+supports = ( [ { " ' and their curly equivalents.
+blind_spots = An apostrophe opening a dialect elision (e.g. 'tis) is split as punctuation.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.TOK.PUNCT.TRAILING]
+stage = tokenize
+description = Split closing punctuation off the end of a chunk.
+supports = . , ; : ! ? ) ] } " ' and their curly equivalents.
+blind_spots = None known beyond the abbreviation interaction below.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.TOK.PUNCT.ELLIPSIS]
+stage = tokenize
+description = Emit a run of two or more periods, or U+2026, as one token.
+supports = ... and .. and the ellipsis character.
+blind_spots = None known.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.TOK.NOSPLIT.ABBREVIATION]
+stage = tokenize
+description = Keep the final period attached when the chunk is a known abbreviation.
+supports = Entries in the en.abbreviations artifact.
+blind_spots = Unknown abbreviations lose their period to TOK.PUNCT.TRAILING.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.TOK.CLITIC]
+stage = tokenize
+description = Split a recognized clitic suffix into its own token.
+supports = Entries in the en.clitics artifact.
+blind_spots = Possessive and contracted `'s` are not distinguished here; that is a POS-layer decision at M1.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.TOK.FUSED]
+stage = tokenize
+description = Split a recognized fused form into its conventional parts.
+supports = Entries in the en.fused artifact.
+blind_spots = Only listed forms are split.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.TOK.HYPHEN]
+stage = tokenize
+description = Split a word-internal hyphen into its own token.
+supports = Hyphenated compounds, matching the UD English convention.
+blind_spots = Prefixed forms such as e-mail and co-op are split too, which UD treebanks also do inconsistently.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.TOK.SYMBOL]
+stage = tokenize
+description = Emit any other non-space character as its own token.
+supports = Currency signs, operators, and stray marks.
+blind_spots = Multi-character emoji sequences may split across code points.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+# --- import ----------------------------------------------------------------
+
+[rule.IMPORT.CONLLU]
+stage = import
+description = Adopt an externally authored analysis from a CoNLL-U file.
+supports = Gold annotations used as fixtures and evaluation references.
+blind_spots = Not a parser. Facts imported this way are marked with derivation kind `import` and must never be reported as engine output.
+precision_target = n/a

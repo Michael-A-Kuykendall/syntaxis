@@ -1,0 +1,16 @@
+# artifact: en.clitics
+# version: 0.1.0
+# license: Apache-2.0
+# source: original; the split points follow the Penn Treebank convention so
+#   that gold CoNLL-U corpora can be compared without re-tokenization.
+# policy: one suffix per line, matched case-insensitively at the end of a word
+#   core. The suffix is emitted as its own token; spans are preserved exactly,
+#   so concatenating the parts always reproduces the input bytes.
+n't
+'ll
+'re
+'ve
+'nt
+'d
+'m
+'s

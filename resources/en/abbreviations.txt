@@ -1,0 +1,88 @@
+# artifact: en.abbreviations
+# version: 0.1.0
+# license: Apache-2.0
+# source: original; compiled by hand for this engine, not copied from Harper,
+#   nlprule, or any LanguageTool-derived bundle (proposal section 9).
+# policy: match is case-sensitive against the token surface including the
+#   trailing period. An entry here suppresses a sentence break and keeps the
+#   period attached to the token.
+# generation: hand maintained; checksum recorded in rulepack.manifest
+Mr.
+Mrs.
+Ms.
+Mx.
+Dr.
+Prof.
+Rev.
+Hon.
+Sr.
+Jr.
+St.
+Mt.
+Ft.
+Gen.
+Col.
+Capt.
+Lt.
+Sgt.
+Gov.
+Sen.
+Rep.
+Jan.
+Feb.
+Mar.
+Apr.
+Jun.
+Jul.
+Aug.
+Sep.
+Sept.
+Oct.
+Nov.
+Dec.
+Mon.
+Tue.
+Tues.
+Wed.
+Thu.
+Thurs.
+Fri.
+Sat.
+Sun.
+Inc.
+Ltd.
+Co.
+Corp.
+Dept.
+Est.
+Ave.
+Blvd.
+Rd.
+approx.
+cf.
+al.
+etc.
+vs.
+viz.
+Fig.
+Figs.
+No.
+Nos.
+Vol.
+Vols.
+Ed.
+Eds.
+pp.
+e.g.
+i.e.
+a.m.
+p.m.
+U.S.
+U.K.
+U.N.
+Ph.D.
+B.A.
+M.A.
+M.D.
+B.Sc.
+M.Sc.
