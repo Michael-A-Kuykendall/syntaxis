@@ -16,10 +16,10 @@ use parser_core::ids::{RuleId, RulePackId, Version};
 use std::collections::BTreeMap;
 use std::fmt;
 
-const MANIFEST_TEXT: &str = include_str!("../../../resources/en/rulepack.manifest");
-const ABBREVIATIONS_TEXT: &str = include_str!("../../../resources/en/abbreviations.txt");
-const CLITICS_TEXT: &str = include_str!("../../../resources/en/clitics.txt");
-const FUSED_TEXT: &str = include_str!("../../../resources/en/fused.txt");
+const MANIFEST_TEXT: &str = include_str!("../resources/en/rulepack.manifest");
+const ABBREVIATIONS_TEXT: &str = include_str!("../resources/en/abbreviations.txt");
+const CLITICS_TEXT: &str = include_str!("../resources/en/clitics.txt");
+const FUSED_TEXT: &str = include_str!("../resources/en/fused.txt");
 
 #[derive(Clone, PartialEq, Eq, Debug)]
 pub struct ArtifactMeta {

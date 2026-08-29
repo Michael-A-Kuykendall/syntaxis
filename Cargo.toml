@@ -14,6 +14,7 @@ rust-version = "1.75"
 license = "Apache-2.0"
 repository = "https://github.com/Michael-A-Kuykendall/syntaxis"
 homepage = "https://github.com/Michael-A-Kuykendall/syntaxis"
+readme = "README.md"
 keywords = ["nlp", "english", "deterministic", "parser", "structural-analysis"]
 categories = ["text-processing", "parsing"]
 
