@@ -2,6 +2,13 @@
 
 ![Syntlogo](https://raw.githubusercontent.com/Michael-A-Kuykendall/syntaxis/main/assets/syntaxis--logo.png)
 
+![Trans rights](https://pride-badges.pony.workers.dev/static/v1?label=trans%20rights&stripeWidth=6&stripeColors=5BCEFA,F5A9B8,FFFFFF,F5A9B8,5BCEFA)
+![LGBTQ+ friendly](https://pride-badges.pony.workers.dev/static/v1?label=lgbtq%2B%20friendly&stripeWidth=6&stripeColors=E40303,FF8C00,FFED00,008026,24408E,732982)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![CI](https://github.com/Michael-A-Kuykendall/syntaxis/workflows/CI/badge.svg)](https://github.com/Michael-A-Kuykendall/syntaxis/actions)
+[![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
+[![GitHub Stars](https://img.shields.io/github/stars/Michael-A-Kuykendall/syntaxis?style=social)](https://github.com/Michael-A-Kuykendall/syntaxis/stargazers)
+
 Deterministic, offline English structural analysis. Rust, **zero dependencies** —
 no model weights, no Python, no C++, no network, no wall-clock, no RNG.
 
@@ -89,6 +96,16 @@ Two of the review questions have answers that fell out of building the fixtures:
    Stanford-style `prep`/`pobj`, and `expl` is supported for existential
    `there`. Legacy labels remain explicitly unsupported rather than silently
    converted.
+
+## Support
+
+This project is a safe space. Trans rights are human rights.
+
+If you or someone you love needs support:
+
+- [The Trevor Project](https://www.thetrevorproject.org/) — 24/7 for LGBTQ+ young people. Call 1-866-488-7386 or text START to 678-678
+- [Trans Lifeline](https://translifeline.org/) — peer support run by and for trans people. US: 877-565-8860
+- [988 Suicide & Crisis Lifeline](https://988lifeline.org/) — call or text 988
 
 ## Not done yet
 
