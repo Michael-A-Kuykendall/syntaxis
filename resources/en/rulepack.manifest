@@ -246,6 +246,41 @@ supports = Tokens for which no bounded attachment rule applies.
 blind_spots = This is a coverage boundary, not a parser-quality claim.
 precision_target = n/a
 
+[rule.GRAMMAR.AGREEMENT.SUBJECT_VERB.V1]
+stage = grammar
+description = Compare known subject and finite-verb number over resolved dependency supports.
+supports = Simple subject-verb agreement, existential copular agreement, and each/every agreement.
+blind_spots = Person agreement, agreement through unresolved alternatives, and constructions without known morphology.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.GRAMMAR.DETERMINER.ARTICLE_NUMBER.V1]
+stage = grammar
+description = Detect an indefinite singular article attached to a plural noun.
+supports = Basic a/an plus plural-noun incompatibility.
+blind_spots = Zero articles, mass nouns, and lexicalized article uses.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.GRAMMAR.VERB_FORM.HAVE_PARTICIPLE.V1]
+stage = grammar
+description = Require a participle after the auxiliary have in the bounded verb chain.
+supports = Basic have plus finite or participial verb chains.
+blind_spots = Perfect constructions with unresolved lexical ambiguity.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.GRAMMAR.PLACEMENT.NEGATION.V1]
+stage = grammar
+description = Flag negation when the bounded structure provides no auxiliary host.
+supports = Explicit not/never negation arcs in simple clauses.
+blind_spots = Do-support insertion and dialectal negation.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.GRAMMAR.AGREEMENT.COORDINATION.V1]
+stage = grammar
+description = Compare known number features across resolved coordinated nominals.
+supports = Coordinated nominal agreement where a conj arc is available.
+blind_spots = Shared arguments and coordination scope.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
 [rule.POS.LEXICAL.V1]
 stage = pos
 description = Assign a Penn tag and observable morphology from the versioned English lexical inventory.

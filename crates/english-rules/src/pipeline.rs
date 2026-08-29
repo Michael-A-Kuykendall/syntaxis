@@ -5,6 +5,7 @@
 //! this same object and consume these same token identities. They will not
 //! re-tokenize, which is the whole point of §4.1.
 
+use crate::grammar::diagnose;
 use crate::parser::parse;
 use crate::pos::analyze_token;
 use crate::rulepack::RulePack;
@@ -125,6 +126,7 @@ pub fn analyze_with_id(text: &str, pack: &RulePack, id: DocumentId) -> Analysis 
     }
 
     parse(&mut analysis, pack);
+    diagnose(&mut analysis, pack);
     analysis
 }
 
