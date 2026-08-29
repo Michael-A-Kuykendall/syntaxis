@@ -154,3 +154,31 @@ description = Adopt an externally authored analysis from a CoNLL-U file.
 supports = Gold annotations used as fixtures and evaluation references.
 blind_spots = Not a parser. Facts imported this way are marked with derivation kind `import` and must never be reported as engine output.
 precision_target = n/a
+
+[rule.POS.LEXICAL.V1]
+stage = pos
+description = Assign a Penn tag and observable morphology from the versioned English lexical inventory.
+supports = Closed-class words, auxiliaries, pronouns, determiners, conjunctions, prepositions, and the frozen M0 fixture vocabulary.
+blind_spots = Open-class words outside the inventory remain unknown; contextual ambiguity is not resolved by an opaque score.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.POS.PUNCT.V1]
+stage = pos
+description = Map token punctuation surfaces to the internal punctuation tags.
+supports = Punctuation tokens emitted by the M0 tokenizer.
+blind_spots = Multi-code-point emoji and unusual symbol sequences remain coarse punctuation.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.POS.SUFFIX.V1]
+stage = pos
+description = Assign conservative verb or plural-noun morphology from explicit suffix rules.
+supports = Recognized -ing, -ed, and plural-s noun patterns.
+blind_spots = Irregular inflection and lexicalized suffixes require explicit inventory entries.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.POS.UNKNOWN.V1]
+stage = pos
+description = Preserve an unresolved lexical analysis when no declared rule safely applies.
+supports = The token span and containing sentence.
+blind_spots = Unknown tokens cannot participate in rules requiring a known POS or feature.
+precision_target = n/a

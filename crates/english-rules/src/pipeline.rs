@@ -5,6 +5,7 @@
 //! this same object and consume these same token identities. They will not
 //! re-tokenize, which is the whole point of §4.1.
 
+use crate::pos::analyze_token;
 use crate::rulepack::RulePack;
 use crate::segment::segment;
 use crate::text::CharMap;
@@ -99,11 +100,25 @@ pub fn analyze_with_id(text: &str, pack: &RulePack, id: DocumentId) -> Analysis 
             token_ids.push(token_id);
         }
 
+        for token_id in token_ids {
+            let token = analysis
+                .tokens
+                .get(&token_id)
+                .expect("token was just added")
+                .clone();
+            analysis.add_token_analysis(analyze_token(&token, sentence_id, pack));
+        }
+
         analysis.add_sentence(Sentence {
             id: sentence_id,
             ordinal: ordinal as u32,
             span: segmented.span,
-            tokens: token_ids,
+            tokens: analysis
+                .tokens
+                .values()
+                .filter(|token| token.sentence == sentence_id)
+                .map(|token| token.id)
+                .collect(),
             support: sentence_support,
         });
     }
@@ -189,6 +204,7 @@ mod tests {
         let report = analysis.retract(&entry);
         assert!(report.contains(FactId::Token(TokenId(0))));
         assert_eq!(analysis.tokens.len(), before - 1);
+        assert!(!analysis.token_analyses.contains_key(&TokenId(0)));
         assert!(analysis.tokens.contains_key(&TokenId(1)));
     }
 }
