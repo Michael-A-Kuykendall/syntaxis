@@ -15,6 +15,10 @@
 //!   data saying `AUX` is preserved verbatim on import rather than re-derived.
 //! * `TO` maps to `PART`, which is wrong for the prepositional `to`. M1 should
 //!   split the tag rather than complicate this table.
+//!
+//! Dependency relations are native UD labels. Legacy Stanford-style `prep`
+//! and `pobj` labels remain unsupported during import rather than being
+//! silently converted.
 
 use parser_core::ids::Version;
 use parser_core::model::{Pos, UPos};
