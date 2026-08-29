@@ -1,0 +1,74 @@
+name: Linguistic defect
+description: A sentence that segments, tokenizes, tags, or attaches wrongly
+labels: ["linguistic", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The most useful report this project receives. A good one converts
+        directly into a fixture.
+
+        **First:** check `resources/en/rulepack.manifest`. Every rule lists its
+        known blind spots. If your case is already declared there, it is known —
+        file only if you think the blind spot should be closed, and say so.
+
+  - type: textarea
+    id: input
+    attributes:
+      label: Input text
+      description: >
+        Copy-paste it, do not retype it. A curly apostrophe versus an ASCII one
+        is frequently the entire bug.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected output
+      description: Token boundaries, sentence split, tag, or arc — whichever applies.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual output
+      description: Paste the CoNLL-U export or canonical JSON if you have it.
+      render: text
+    validations:
+      required: true
+
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Which stage is wrong?
+      options:
+        - Sentence segmentation
+        - Tokenization
+        - POS or morphology
+        - Dependency attachment
+        - Grammar diagnostic
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: Engine and rule-pack versions
+      description: Both appear in serialized output.
+      placeholder: "engine 0.1.0, rule pack en-core@0.1.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: authority
+    attributes:
+      label: What makes the expected output correct?
+      description: >
+        Optional but valuable. A treebank convention, a style guide, a grammar
+        reference, or "this is how UD English EWT annotates it". Disagreements
+        about English are usually disagreements about which convention applies.

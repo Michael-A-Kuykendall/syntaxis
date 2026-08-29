@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security or determinism defect
+    url: https://github.com/Michael-A-Kuykendall/syntaxis/security/advisories/new
+    about: Report privately. Do not open a public issue. See SECURITY.md.
+  - name: Question or feature idea
+    url: https://github.com/Michael-A-Kuykendall/syntaxis/discussions
+    about: Discussions, not issues. Feature requests never start as a PR.
+  - name: Why was my pull request closed?
+    url: https://github.com/Michael-A-Kuykendall/syntaxis/blob/main/CONTRIBUTING.md
+    about: This project is open source but not open contribution.

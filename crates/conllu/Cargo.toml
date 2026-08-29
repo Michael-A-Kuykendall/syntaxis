@@ -4,8 +4,12 @@ version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
 description = "Strict CoNLL-U import and export for the Syntaxis analysis model."
 
 [dependencies]
-parser-core = { path = "../parser-core" }
-english-rules = { path = "../english-rules" }
+parser-core = { version = "0.1.0", path = "../parser-core" }
+english-rules = { version = "0.1.0", path = "../english-rules" }

@@ -1,0 +1,37 @@
+name: Licensing or provenance concern
+description: A reference artifact, fixture, or corpus whose origin looks wrong
+labels: ["provenance", "priority"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Taken seriously and triaged ahead of ordinary bugs. This project's
+        architecture exists partly to keep reference-data provenance auditable,
+        so a defect here is a defect in the premise.
+
+  - type: input
+    id: artifact
+    attributes:
+      label: Which file
+      placeholder: "resources/en/abbreviations.txt"
+    validations:
+      required: true
+
+  - type: textarea
+    id: concern
+    attributes:
+      label: What is the concern
+      description: >
+        For example: content appears derived from a copyleft source, a corpus
+        component has no stated licence, or a checksum does not match a
+        documented generation command.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Upstream source, licence text, or the overlapping content.
+    validations:
+      required: true

@@ -12,6 +12,10 @@ version = "0.1.0"
 edition = "2021"
 rust-version = "1.75"
 license = "Apache-2.0"
+repository = "https://github.com/Michael-A-Kuykendall/syntaxis"
+homepage = "https://github.com/Michael-A-Kuykendall/syntaxis"
+keywords = ["nlp", "english", "deterministic", "parser", "structural-analysis"]
+categories = ["text-processing", "parsing"]
 
 # Determinism contract: this workspace has no external dependencies at all.
 # Every dependency added later must be justified in docs/RESOURCES.md and must

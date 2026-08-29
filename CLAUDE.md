@@ -60,18 +60,39 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 
 ## Build & Test
 
-_Add your build and test commands here_
-
 ```bash
-# Example:
-# npm install
-# npm test
+cargo build --offline               # builds all crates offline (zero deps)
+cargo test --offline                # 80 tests, no network needed
+cargo run -p engine-cli -- "The cat are sleeping."   # canonical JSON analysis
+cargo run -p engine-cli --example demo               # live tokenization / import / retraction
+cargo clippy --all-targets -- -D warnings            # lint
+cargo fmt --check                                   # formatting check
+make gate                                            # full pre-release gate
 ```
 
 ## Architecture Overview
 
-_Add a brief overview of your project architecture_
+Deterministic, offline English structural analysis engine. Zero external
+dependencies. A single `Analysis` snapshot per document, byte-stable canonical
+JSON, provenance (support sets) on every fact, and cascading retraction.
+
+| crate | contains |
+| --- | --- |
+| `parser-core` | data model, spans, provenance (support sets), fact graph, canonical JSON, SHA-256 |
+| `english-rules` | rule-pack loader, segmentation, tokenization, analysis pipeline |
+| `conllu` | strict UD import/export and the versioned Penn↔UD projection |
+| `engine-cli` | command-line front end (`syntaxis` binary) |
 
 ## Conventions & Patterns
 
-_Add your project-specific conventions here_
+- **Determinism is the top invariant.** No `HashMap`/`HashSet` in any path
+  reaching serialized output; no clock, RNG, network, or env reads in the
+  analysis path.
+- **`parser-core` contains no English knowledge.** Language-specific rules and
+  word lists belong in `english-rules`.
+- **Provenance on every fact.** Every derived fact carries a `SupportSet`
+  naming its rule, rule pack, and sources.
+- **Field order in `parser-core::serialize` is the contract**, not an
+  implementation detail.
+- See [CONTRIBUTING.md](CONTRIBUTING.md) and [DEVELOPERS.md](DEVELOPERS.md) for
+  the full governance model.

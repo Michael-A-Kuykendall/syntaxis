@@ -1,0 +1,64 @@
+name: Bug report
+description: A crash, panic, wrong span, or other non-linguistic defect
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For a sentence that parses wrongly, use the **Linguistic defect**
+        template instead. For anything security- or determinism-related, report
+        privately — see SECURITY.md.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: Smallest input and shortest code that triggers it.
+      render: rust
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: "0.1.0, or a commit sha"
+    validations:
+      required: true
+
+  - type: input
+    id: rustc
+    attributes:
+      label: rustc version
+      placeholder: "rustc 1.75.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Platform
+      options: [Linux, macOS, Windows, WASM, Other]
+    validations:
+      required: true
+
+  - type: textarea
+    id: backtrace
+    attributes:
+      label: Backtrace
+      description: "For panics. Run with RUST_BACKTRACE=1."
+      render: text

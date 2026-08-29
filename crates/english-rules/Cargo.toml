@@ -4,7 +4,11 @@ version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
 description = "Deterministic English normalization, segmentation, tokenization, and rule packs."
 
 [dependencies]
-parser-core = { path = "../parser-core" }
+parser-core = { version = "0.1.0", path = "../parser-core" }
