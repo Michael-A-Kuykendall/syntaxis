@@ -130,6 +130,17 @@ fn parse_sentence(analysis: &mut Analysis, sentence_id: SentenceId, pack: &RuleP
             } else {
                 (None, Relation::Unsupported, UNSUPPORTED_RULE)
             }
+        } else if token_analysis.pos == Pos::TO {
+            if let Some(verb) = following.iter().find(|candidate| {
+                analysis
+                    .token_analyses
+                    .get(&candidate.id)
+                    .is_some_and(|candidate| matches!(candidate.pos, Pos::VB | Pos::VBP | Pos::VBZ))
+            }) {
+                (Some(verb.id), Relation::Mark, MODIFIER_RULE)
+            } else {
+                (root_id, Relation::Unsupported, UNSUPPORTED_RULE)
+            }
         } else if token_analysis.pos == Pos::CC {
             (root_id, Relation::Cc, COORD_RULE)
         } else if token_analysis.pos == Pos::RB
@@ -138,6 +149,20 @@ fn parse_sentence(analysis: &mut Analysis, sentence_id: SentenceId, pack: &RuleP
             (root_id, Relation::Neg, MODIFIER_RULE)
         } else if token_analysis.pos == Pos::RB {
             (root_id, Relation::Advmod, MODIFIER_RULE)
+        } else if is_nominal_analysis(&token_analysis)
+            && prior
+                .iter()
+                .any(|candidate| matches!(candidate.normalized.as_str(), "and" | "or" | "but"))
+        {
+            (
+                prior
+                    .iter()
+                    .rev()
+                    .find(|candidate| is_nominal(analysis, candidate.id))
+                    .map(|candidate| candidate.id),
+                Relation::Conj,
+                COORD_RULE,
+            )
         } else if is_nominal_analysis(&token_analysis)
             && prior.iter().all(|candidate| Some(candidate.id) != root_id)
             && !prior.iter().any(|candidate| candidate.normalized == "of")

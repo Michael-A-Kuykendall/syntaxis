@@ -165,9 +165,17 @@ fn classify(token: &Token) -> (Pos, String, Morphology, &'static str) {
             (Pos::VBZ, "have".to_string())
         }
         "have" | "do" => {
+            if word == "have" {
+                morphology.number = Number::Plur;
+                morphology.person = Person::Third;
+            }
             morphology.verb_form = VerbForm::Fin;
             morphology.tense = Tense::Pres;
             (Pos::VBP, word.to_string())
+        }
+        "go" | "run" | "send" | "think" | "sleep" | "agree" => {
+            morphology.verb_form = VerbForm::Fin;
+            (Pos::VB, word.to_string())
         }
         "did" => {
             morphology.verb_form = VerbForm::Fin;

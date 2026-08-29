@@ -3,10 +3,10 @@
 Deterministic, offline English structural analysis. Rust, **zero dependencies** —
 no model weights, no Python, no C++, no network, no wall-clock, no RNG.
 
-This repository currently implements **M0** from the `grampan-wv4` proposal:
-frozen data model, surface layer, canonical serialization, strict CoNLL-U
-round-trip, and a working support/retraction mechanism. It is not yet a parser
-and does not claim to be one.
+This repository currently implements the M0 substrate plus the first M1/M2
+structural slices from the `grampan-wv4` proposal: deterministic lexical
+analysis, bounded dependency attachment, and provenance-backed grammar
+diagnostics. It is deliberately not a complete English parser or proofreader.
 
 ```
 cargo test                          # 71 tests, no network needed
@@ -28,8 +28,8 @@ cargo run -p engine-cli --example demo # live tokenization / import / retraction
 ## What M0 actually delivers
 
 **One snapshot per document (§4.1).** `analyze()` returns a single `Analysis`.
-Grammar rules and dependency rules will attach to this object and consume these
-token identities; neither will re-tokenize.
+POS, dependency, and grammar rules attach to this object and consume these
+token identities; none re-tokenize.
 
 **Determinism as a tested property (§4.2).** Serialization is canonical JSON
 with declared member order, no floats, no timestamps. `Analysis::digest()` is a
@@ -85,15 +85,16 @@ Two of the review questions have answers that fell out of building the fixtures:
 
 M0 scope ends here. The following are deliberately absent, not overlooked:
 
-- **POS and morphology assignment.** The model carries them and CoNLL-U import
-  populates them; nothing derives them from text yet. (M1)
-- **Dependency parsing.** No candidate generation, no constraint solving. Every
-  arc in the repository came from a gold file and is marked
-  `DerivationKind::Import` so it can never be mistaken for engine output. (M1)
-- **Grammar rules.** None of the eight are implemented. (M2)
+- **Broader POS and morphology coverage.** The first closed-world lexical and
+  suffix rules are implemented; unknown open-class words remain explicit.
+- **Complete dependency parsing.** The current parser is bounded and emits
+  explicit unsupported arcs outside its declared construction set. (M1)
+- **Remaining grammar coverage.** Agreement, determiner, verb-form, and
+  negation-placement diagnostics exist; broader clause/complement and
+  ambiguity handling remain. (M2)
 - **The CLI.** `crates/engine-cli/src/main.rs` is an empty stub; use
   `cargo run --example demo` meanwhile.
 - **The 500-sentence corpus and the evaluation gate.** No thresholds are
-  proposed, per §11.
+  proposed yet, per §11.
 - **NFC/NFD normalization**, which needs either a dependency or a large embedded
   table. Recorded as a known gap.
