@@ -1,3 +1,4 @@
+pub mod parser;
 pub mod pipeline;
 pub mod pos;
 pub mod rulepack;
