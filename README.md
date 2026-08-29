@@ -28,7 +28,9 @@ cargo run -p engine-cli -- "The cat are sleeping." # canonical JSON analysis
 
 The `syntaxis` binary accepts text and emits canonical JSON by default; use
 `--digest`, `--validate`, `--conllu-in FILE`, `--conllu-out`, or
-`--retract-token ID` for machine-readable lifecycle operations.
+`--retract-token ID` for machine-readable lifecycle operations. Use
+`--evaluation` to run the original 500-case structural gate; that gate is a
+construction-focused baseline, not a claim about natural-language coverage.
 
 ## What M0 actually delivers
 
