@@ -1,0 +1,13 @@
+# Every path in this repository is owned by the maintainer.
+# See CONTRIBUTING.md: this project is open source, not open contribution.
+
+*                       @<YOUR_GITHUB>
+
+# Called out individually because a change here breaks downstream consumers
+# silently rather than loudly.
+/crates/parser-core/    @<YOUR_GITHUB>
+/resources/             @<YOUR_GITHUB>
+/fixtures/              @<YOUR_GITHUB>
+/deny.toml              @<YOUR_GITHUB>
+/LICENSE                @<YOUR_GITHUB>
+/NOTICE                 @<YOUR_GITHUB>
