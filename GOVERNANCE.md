@@ -50,4 +50,4 @@ was chosen so that a fork can verify it inherited exactly what it thinks it did.
 
 ---
 
-**Maintainer:** <YOUR_NAME> <<YOUR_EMAIL>>
+**Maintainer:** Michael A. Kuykendall <michaelallenkuykendall@gmail.com>

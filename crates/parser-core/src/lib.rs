@@ -2,18 +2,17 @@
 //!
 //! This crate owns the data model and nothing else. It contains no English
 //! knowledge, no lexicon, no rules, and no I/O. The grammar layer and the
-//! dependency layer are both *consumers* of what is defined here (proposal
-//! §4.1), which is the concrete meaning of "sibling products over one
-//! substrate".
+//! dependency layer are both *consumers* of what is defined here — the
+//! concrete meaning of "sibling products over one substrate".
 //!
 //! Invariants this crate enforces mechanically rather than by convention:
 //!
 //! * every derived fact carries a [`support::SupportSet`] naming its rule,
-//!   rule pack, derivation kind, and every source it consumed (§4.5);
+//!   rule pack, derivation kind, and every source it consumed;
 //! * retracting a source removes exactly its transitive dependents, with no
-//!   caller-side cleanup (§8);
-//! * serialization is byte-for-byte stable and contains no timing data (§4.2);
-//! * a result may not claim more certainty than its supports allow (§7), and
+//!   caller-side cleanup;
+//! * serialization is byte-for-byte stable and contains no timing data;
+//! * a result may not claim more certainty than its supports allow, and
 //!   [`analysis::Analysis::validate`] reports it when one does.
 
 #![forbid(unsafe_code)]

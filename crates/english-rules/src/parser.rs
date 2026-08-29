@@ -1,4 +1,4 @@
-//! Bounded deterministic dependency attachment for the M1 gate.
+//! Bounded deterministic dependency attachment.
 //!
 //! This is deliberately a safe structural kernel, not a claim of complete
 //! English parsing. It emits one accepted arc per token when a declared rule

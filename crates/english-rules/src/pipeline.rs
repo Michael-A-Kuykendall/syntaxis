@@ -1,9 +1,8 @@
-//! The M0 pipeline: normalization and segmentation, then tokenization.
+//! The analysis pipeline: normalization and segmentation, then tokenization.
 //!
-//! The pipeline is staged internally but its durable result is one [`Analysis`]
-//! (§6). Later stages — POS at M1, attachment at M1, grammar at M2 — attach to
-//! this same object and consume these same token identities. They will not
-//! re-tokenize, which is the whole point of §4.1.
+//! The pipeline is staged internally but its durable result is one [`Analysis`].
+//! Later stages — POS, dependency attachment, grammar — attach to this same
+//! object and consume these same token identities. They will not re-tokenize.
 
 use crate::grammar::diagnose;
 use crate::parser::parse;
@@ -183,7 +182,7 @@ mod tests {
         }
     }
 
-    /// §4.2: same bytes in, same bytes out.
+    /// Same bytes in, same bytes out.
     #[test]
     fn serialization_is_byte_stable_across_runs() {
         let text = "There is many reasons. Dr. Smith didn't agree.";

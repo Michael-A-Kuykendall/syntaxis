@@ -92,4 +92,4 @@ in the commit and the changelog.
 
 ---
 
-**Maintainer:** <YOUR_NAME> <<YOUR_EMAIL>>
+**Maintainer:** Michael A. Kuykendall <michaelallenkuykendall@gmail.com>

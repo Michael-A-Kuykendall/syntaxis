@@ -1,0 +1,73 @@
+# cargo-deny configuration.
+#
+# This workspace has zero dependencies, so today this file passes trivially.
+# It is committed anyway because it is a ratchet: the moment someone adds a
+# crate, CI answers the licence question automatically instead of six months
+# later during a legal review.
+#
+#   cargo install cargo-deny && cargo deny check
+
+[graph]
+all-features = true
+
+[advisories]
+yanked = "deny"
+unmaintained = "all"
+
+[licenses]
+# Permissive only. The engine ships reference data whose licensing is already
+# the project's most delicate area; adding copyleft code obligations on top is
+# not acceptable.
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Unicode-3.0",
+    "Zlib",
+    "CC0-1.0",
+]
+confidence-threshold = 0.95
+unused-allowed-license = "allow"
+
+[[licenses.exceptions]]
+# None. Add here only with a written justification in the commit message.
+name = "this-entry-is-a-placeholder"
+allow = []
+
+[bans]
+multiple-versions = "deny"
+wildcards = "deny"
+
+# Specific bans, with reasons. These are the crates most likely to be reached
+# for by someone "just making the tests nicer" who has not read CONTRIBUTING.md.
+[[bans.deny]]
+name = "rand"
+reason = "randomness in any form breaks the determinism contract"
+
+[[bans.deny]]
+name = "chrono"
+reason = "wall-clock values must never reach serialized output"
+
+[[bans.deny]]
+name = "time"
+reason = "wall-clock values must never reach serialized output"
+
+[[bans.deny]]
+name = "ahash"
+reason = "randomly-seeded hashing produces order-dependent iteration"
+
+[[bans.deny]]
+name = "reqwest"
+reason = "the engine is offline by contract"
+
+[[bans.deny]]
+name = "ureq"
+reason = "the engine is offline by contract"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

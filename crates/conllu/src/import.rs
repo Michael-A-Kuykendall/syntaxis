@@ -1,9 +1,9 @@
 //! Strict CoNLL-U import.
 //!
 //! "Strict" means: every deviation is an error with a line number, and nothing
-//! is guessed. A deprel outside the first-gate relation set becomes an
+//! is guessed. A deprel outside the supported relation set becomes an
 //! `Unsupported` arc carrying its original label, never a nearby supported
-//! relation (§5). Multi-word tokens and empty nodes are rejected outright
+//! relation. Multi-word tokens and empty nodes are rejected outright
 //! rather than silently flattened, because flattening them would break the
 //! span contract.
 //!

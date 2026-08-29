@@ -1,6 +1,6 @@
 //! Canonical JSON.
 //!
-//! §4.2 requires byte-for-byte stable serialization. That rules out any writer
+//! Serialization is byte-for-byte stable. That rules out any writer
 //! whose object order depends on a hash map. This one keeps object members in
 //! the order the producer declared, and the producers in `serialize.rs` declare
 //! a fixed order. There are no floats in the model, so there is no float

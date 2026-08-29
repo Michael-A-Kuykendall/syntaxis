@@ -1,0 +1,4 @@
+# Canonical name and address per contributor, so shortlog and the changelog
+# do not show the same person three times.
+# Format:  Proper Name <proper@email>  <other@email>
+Michael A. Kuykendall <michaelallenkuykendall@gmail.com>

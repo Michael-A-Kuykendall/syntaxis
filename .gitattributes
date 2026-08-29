@@ -1,0 +1,11 @@
+* text=auto eol=lf
+
+# Fixtures and reference artifacts are byte-exact inputs to checksum
+# verification and byte-for-byte round-trip tests. A line-ending rewrite on
+# checkout silently breaks both, so these are pinned explicitly.
+*.conllu    text eol=lf
+*.manifest  text eol=lf
+resources/**  text eol=lf
+fixtures/**   text eol=lf
+
+Cargo.lock  linguist-generated=true

@@ -1,6 +1,6 @@
 //! Support tracking and retraction.
 //!
-//! §8 requires that removing a source retracts exactly the derived items that
+//! Removing a source retracts exactly the derived items that
 //! depend on it, transitively, with no manual downstream cleanup. That is a
 //! reverse index problem, not a rule problem, so it lives in `parser-core` and
 //! every rule layer gets it for free.

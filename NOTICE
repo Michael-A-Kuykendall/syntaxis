@@ -1,0 +1,33 @@
+syntaxis
+Copyright (c) 2026 Michael A. Kuykendall
+
+This product includes software developed by Michael A. Kuykendall.
+
+--------------------------------------------------------------------------------
+Third-party code
+--------------------------------------------------------------------------------
+
+None. This workspace has no external dependencies. Everything under crates/ is
+original work, including the SHA-256 implementation in
+crates/parser-core/src/hash.rs (written against the FIPS 180-4 specification and
+validated against its published test vectors).
+
+--------------------------------------------------------------------------------
+Reference data
+--------------------------------------------------------------------------------
+
+Linguistic reference artifacts under resources/ are original compilations
+prepared for this project. They are NOT derived from LanguageTool, nlprule,
+Harper, or any treebank distribution.
+
+Per-artifact source, licence, normalization policy, generation method, and
+checksum are recorded in resources/en/rulepack.manifest and docs/RESOURCES.md.
+
+Tokenization split points follow the Penn Treebank *convention* — that is, the
+conventional places to divide contractions and clitics. Conventions are not
+copyrightable; no Penn Treebank data is included or required.
+
+Gold annotations under fixtures/ are hand-written for this project. Any corpus
+added later must arrive with explicit per-component licence terms, recorded in
+docs/RESOURCES.md before merge. See CONTRIBUTING.md, "The linguistic resource
+rule".

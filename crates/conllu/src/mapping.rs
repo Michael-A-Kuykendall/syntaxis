@@ -2,7 +2,7 @@
 //!
 //! This mapping is lossy in both directions and every lossy decision is listed
 //! here rather than buried in a match arm. It is versioned separately from the
-//! engine (§9) so a consumer can pin it: changing a single arm below changes
+//! engine so a consumer can pin it: changing a single arm below changes
 //! CoNLL-U output for existing documents.
 //!
 //! Known ambiguities, all resolved conservatively and all recoverable because
@@ -10,11 +10,11 @@
 //!
 //! * `IN` covers both prepositions and subordinating conjunctions. It maps to
 //!   `ADP`; a `mark` arc is what distinguishes `SCONJ`, and that is a
-//!   structural decision the M1 attachment layer makes, not a tag lookup.
+//!   structural decision the attachment layer makes, not a tag lookup.
 //! * `VB*` covers both lexical and auxiliary verbs. It maps to `VERB`; gold
 //!   data saying `AUX` is preserved verbatim on import rather than re-derived.
-//! * `TO` maps to `PART`, which is wrong for the prepositional `to`. M1 should
-//!   split the tag rather than complicate this table.
+//! * `TO` maps to `PART`, which is wrong for the prepositional `to`. A future
+//!   version should split the tag rather than complicate this table.
 //!
 //! Dependency relations are native UD labels. Legacy Stanford-style `prep`
 //! and `pobj` labels remain unsupported during import rather than being

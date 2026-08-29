@@ -2,7 +2,7 @@
 //!
 //! The document text is never rewritten. Normalization produces a *separate*
 //! lookup form stored alongside the untouched surface, so spans always index
-//! the original bytes (§6.1: never discard source offsets).
+//! the original bytes: source offsets are never discarded.
 
 use parser_core::span::Span;
 

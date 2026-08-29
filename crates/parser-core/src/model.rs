@@ -1,6 +1,6 @@
 //! The frozen data model.
 //!
-//! M0 freezes these shapes. Adding a variant to a closed enum below is a
+//! Adding a variant to a closed enum below is a
 //! breaking change to serialized output and requires a bump of
 //! `analysis_version`.
 
@@ -696,7 +696,7 @@ impl Resolution {
     }
 
     /// True when a diagnostic resting on this group must inherit uncertainty
-    /// (§7: a diagnostic may not be promoted to definite on unresolved support).
+    /// (a diagnostic may not be promoted to definite on unresolved support).
     pub fn is_uncertain(self) -> bool {
         matches!(self, Resolution::Ambiguous | Resolution::Unsupported)
     }

@@ -11,7 +11,7 @@ use crate::model::*;
 use crate::span::Span;
 use crate::support::{SourceRef, SupportSet};
 
-pub const SCHEMA: &str = "english-engine/analysis";
+pub const SCHEMA: &str = "syntaxis/analysis";
 pub const SCHEMA_VERSION: &str = "0.1.0";
 
 pub fn span_json(span: &Span) -> Json {

@@ -1,4 +1,4 @@
-//! SHA-256, implemented here so §9 artifact checksums do not pull in a
+//! SHA-256, implemented here so artifact checksums do not pull in a
 //! dependency. Verified against the FIPS 180-4 sample vectors in tests.
 
 const K: [u32; 64] = [

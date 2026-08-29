@@ -1,6 +1,6 @@
 //! Deterministic lexical and contextual English analysis.
 //!
-//! M1 intentionally starts with a small, auditable lexicon and suffix rules.
+//! The current scope starts with a small, auditable lexicon and suffix rules.
 //! This is not a statistical tagger: an unrecognized token remains `Unknown`
 //! instead of receiving an unsupported guess. The dependency layer can use
 //! the explicit lexical facts and their provenance to decide what it can

@@ -1,9 +1,9 @@
-//! The single analysis snapshot (§4.1).
+//! The single analysis snapshot.
 //!
 //! One document produces exactly one `Analysis`. Grammar rules and dependency
 //! rules are both *consumers* of this object; neither re-tokenizes, and neither
 //! mutates the other's output. Everything they add lands here with a support
-//! record, which is what makes §8 retraction mechanical.
+//! record, which is what makes retraction mechanical.
 
 use crate::factgraph::{FactGraph, RetractionReport};
 use crate::ids::*;
@@ -122,7 +122,7 @@ impl Analysis {
         )
     }
 
-    /// Certainty a derived item must carry, given what it rests on (§7).
+    /// Certainty a derived item must carry, given what it rests on.
     ///
     /// A result may never be more certain than its least certain support.
     pub fn certainty_for(&self, sources: &[SourceRef]) -> Certainty {
@@ -157,7 +157,7 @@ impl Analysis {
     // -- retraction --------------------------------------------------------
 
     /// Retract a source and everything derived from it, from both the fact
-    /// graph and the collections. No caller-side cleanup is required (§8).
+    /// graph and the collections. No caller-side cleanup is required.
     pub fn retract(&mut self, source: &SourceRef) -> RetractionReport {
         let report = self.graph.retract(source);
         for fact in &report.removed {
@@ -215,7 +215,7 @@ impl Analysis {
 
     // -- validation --------------------------------------------------------
 
-    /// Structural checks required by §11 acceptance criteria. An empty result
+    /// Structural checks. An empty result
     /// means: spans valid, token order valid, and every sentence is either a
     /// valid tree over accepted arcs or explicitly marked otherwise.
     pub fn validate(&self) -> Vec<ValidationIssue> {

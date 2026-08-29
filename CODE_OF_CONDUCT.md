@@ -33,7 +33,7 @@ about the project.
 
 ## Enforcement
 
-Report to <<YOUR_EMAIL>>. Reports stay confidential.
+Report to michaelallenkuykendall@gmail.com. Reports stay confidential.
 
 The maintainer may, at their discretion and without appeal: edit or delete
 comments, lock a thread, close an issue or PR, or block an account. There is no

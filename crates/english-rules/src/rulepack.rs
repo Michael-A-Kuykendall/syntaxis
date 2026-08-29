@@ -1,14 +1,14 @@
-//! Rule packs (§9).
+//! Rule packs.
 //!
 //! A rule pack is a manifest plus a set of reference artifacts. Both are
 //! embedded at build time and both are checksum-verified at load, so a build
 //! either has the exact resources it claims or refuses to start. Nothing is
 //! read from disk or the network at analysis time.
 //!
-//! The manifest also carries, per rule, the declarations §6.4 demands:
-//! supported constructions, known blind spots, and a precision target. Those
-//! fields are deliberately allowed to say "not yet measured" — §11 forbids
-//! inventing a threshold before the baseline exists, and a manifest that lies
+//! The manifest also carries, per rule, the declarations: supported
+//! constructions, known blind spots, and a precision target. Those
+//! fields are deliberately allowed to say "not yet measured" — inventing a
+//! threshold before the baseline exists is forbidden, and a manifest that lies
 //! about it would be worse than one that admits it.
 
 use parser_core::hash::sha256_hex;
@@ -133,7 +133,7 @@ impl RulePack {
 
     /// Look up a rule, returning an error rather than silently proceeding: a
     /// rule that fires without a manifest entry has no declared blind spots,
-    /// which is exactly the situation §6.4 exists to prevent.
+    /// which is exactly the situation the manifest exists to prevent.
     pub fn rule(&self, id: &str) -> Result<&RuleMeta, RulePackError> {
         self.rules
             .get(&RuleId::new(id))

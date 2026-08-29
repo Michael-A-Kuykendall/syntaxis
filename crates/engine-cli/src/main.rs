@@ -93,7 +93,7 @@ fn run() -> Result<(), String> {
 
 fn print_help() {
     println!(
-        "Syntaxis M0/M1/M2 structural analysis\n\n\
+        "Syntaxis — deterministic English structural analysis\n\n\
 Usage:\n  syntaxis [OPTIONS] TEXT...\n  syntaxis --conllu-in FILE --conllu-out\n\n\
 Options:\n  --conllu-in FILE       import strict CoNLL-U instead of analyzing text\n  --conllu-out           emit canonical CoNLL-U\n  --validate             print structural validation issues\n  --digest               print the byte-stable analysis digest\n  --retract-token ID     retract one token analysis before output\n  --evaluation           run the frozen 500-case structural gate\n  -h, --help             show this help"
     );
