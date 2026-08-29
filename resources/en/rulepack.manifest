@@ -15,7 +15,7 @@ version = 0.1.0
 dialect = en-US
 analysis_version = 0.1.0
 conllu_mapping_version = 0.1.0
-description = M0 surface layer: segmentation and tokenization only.
+description = M0 surface layer: segmentation, tokenization, and UD relation vocabulary.
 
 [artifact.abbreviations]
 path = resources/en/abbreviations.txt

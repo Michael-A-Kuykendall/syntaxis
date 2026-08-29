@@ -76,10 +76,10 @@ Two of the review questions have answers that fell out of building the fixtures:
    `Relation::Unsupported` carrying the raw label — correct behaviour, but the
    construction is one of the three motivating cases, and §6.4 rule 2 needs it.
    Recommend adding `expl` before M1.
-2. **The relation set is Stanford-flavoured, not UD.** `prep`/`pobj` are SD;
-   UD uses `case`/`nmod`. Both are defensible, but the CoNLL-U adapter cannot
-   be scored against UD gold data without a documented conversion. Recommend
-   picking one and versioning the mapping.
+2. **The relation set is now native UD.** `case`/`nmod` replace the earlier
+   Stanford-style `prep`/`pobj`, and `expl` is supported for existential
+   `there`. Legacy labels remain explicitly unsupported rather than silently
+   converted.
 
 ## Not done yet
 

@@ -41,8 +41,7 @@ fn document_text_is_reconstructed_from_the_tokens() {
     }
 }
 
-/// The frozen relation set has no `expl`. The importer must say so rather than
-/// bending it into `nsubj`.
+/// `expl` is part of the frozen UD relation set and must be accepted.
 #[test]
 fn out_of_set_relations_are_marked_unsupported_not_guessed() {
     let analysis = import_str(FIXTURE, &pack()).unwrap();
@@ -51,9 +50,22 @@ fn out_of_set_relations_are_marked_unsupported_not_guessed() {
         .values()
         .find(|a| a.dependent == TokenId(5))
         .expect("the existential `There` must have an arc");
-    assert_eq!(there.relation, Relation::Unsupported);
-    assert_eq!(there.raw_label.as_deref(), Some("expl"));
-    assert_eq!(there.status, ArcStatus::Unsupported);
+    assert_eq!(there.relation, Relation::Expl);
+    assert_eq!(there.raw_label, None);
+    assert_eq!(there.status, ArcStatus::Accepted);
+}
+
+#[test]
+fn legacy_stanford_relations_are_not_silently_converted() {
+    let input = "1\tEach\teach\tPRON\tDT\tNumber=Sing\t2\tnsubj\t_\t_\n2\thas\thave\tVERB\tVBZ\tNumber=Sing\t0\troot\t_\t_\n3\tof\tof\tADP\tIN\t_\t1\tprep\t_\t_\n";
+    let graph = import_str(input, &pack()).unwrap();
+    let prep = graph
+        .arcs
+        .values()
+        .find(|arc| arc.raw_label.as_deref() == Some("prep"))
+        .unwrap();
+    assert_eq!(prep.relation, Relation::Unsupported);
+    assert_eq!(prep.status, ArcStatus::Unsupported);
 }
 
 #[test]

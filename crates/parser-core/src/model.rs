@@ -460,7 +460,7 @@ impl Morphology {
 // Relations
 // ---------------------------------------------------------------------------
 
-/// The first-gate relation set. Deliberately smaller than UD.
+/// The first-gate Universal Dependencies relation set.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Debug)]
 pub enum Relation {
     Root,
@@ -471,12 +471,13 @@ pub enum Relation {
     Aux,
     AuxPass,
     Cop,
+    Expl,
     Neg,
     Det,
     Amod,
     Advmod,
-    Prep,
-    Pobj,
+    Case,
+    Nmod,
     Compound,
     Conj,
     Cc,
@@ -503,12 +504,13 @@ impl Relation {
             Aux => "aux",
             AuxPass => "aux:pass",
             Cop => "cop",
+            Expl => "expl",
             Neg => "neg",
             Det => "det",
             Amod => "amod",
             Advmod => "advmod",
-            Prep => "prep",
-            Pobj => "pobj",
+            Case => "case",
+            Nmod => "nmod",
             Compound => "compound",
             Conj => "conj",
             Cc => "cc",
@@ -533,12 +535,13 @@ impl Relation {
             "aux" => Aux,
             "aux:pass" => AuxPass,
             "cop" => Cop,
+            "expl" => Expl,
             "neg" => Neg,
             "det" => Det,
             "amod" => Amod,
             "advmod" => Advmod,
-            "prep" => Prep,
-            "pobj" => Pobj,
+            "case" => Case,
+            "nmod" => Nmod,
             "compound" => Compound,
             "conj" => Conj,
             "cc" => Cc,
@@ -553,7 +556,7 @@ impl Relation {
         })
     }
 
-    pub const ALL_SUPPORTED: [Relation; 23] = [
+    pub const ALL_SUPPORTED: [Relation; 24] = [
         Relation::Root,
         Relation::Nsubj,
         Relation::NsubjPass,
@@ -562,12 +565,13 @@ impl Relation {
         Relation::Aux,
         Relation::AuxPass,
         Relation::Cop,
+        Relation::Expl,
         Relation::Neg,
         Relation::Det,
         Relation::Amod,
         Relation::Advmod,
-        Relation::Prep,
-        Relation::Pobj,
+        Relation::Case,
+        Relation::Nmod,
         Relation::Compound,
         Relation::Conj,
         Relation::Cc,
