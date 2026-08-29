@@ -9,8 +9,9 @@ analysis, bounded dependency attachment, and provenance-backed grammar
 diagnostics. It is deliberately not a complete English parser or proofreader.
 
 ```
-cargo test                          # 71 tests, no network needed
+cargo test                          # 79 tests, no network needed
 cargo run -p engine-cli --example demo # live tokenization / import / retraction
+cargo run -p engine-cli -- "The cat are sleeping." # canonical JSON analysis
 ```
 
 ## Layout
@@ -24,6 +25,10 @@ cargo run -p engine-cli --example demo # live tokenization / import / retraction
 
 `resources/en/` holds the versioned, checksummed reference artifacts.
 `fixtures/` holds hand-annotated gold data.
+
+The `syntaxis` binary accepts text and emits canonical JSON by default; use
+`--digest`, `--validate`, `--conllu-in FILE`, `--conllu-out`, or
+`--retract-token ID` for machine-readable lifecycle operations.
 
 ## What M0 actually delivers
 
