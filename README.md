@@ -13,7 +13,7 @@ Deterministic, offline English structural analysis. Rust, **zero dependencies** 
 no model weights, no Python, no C++, no network, no wall-clock, no RNG.
 
 This repository currently implements the M0 substrate plus the first M1/M2
-structural slices from the `grampan-wv4` proposal: deterministic lexical
+structural slices from the `wv4` proposal: deterministic lexical
 analysis, bounded dependency attachment, and provenance-backed grammar
 diagnostics. It is deliberately not a complete English parser or proofreader.
 
