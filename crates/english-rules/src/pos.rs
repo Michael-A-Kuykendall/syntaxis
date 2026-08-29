@@ -186,13 +186,17 @@ fn classify(token: &Token) -> (Pos, String, Morphology, &'static str) {
             (Pos::MD, word.to_string())
         }
         "cat" | "book" | "reason" | "student" | "students" | "smith" | "example" | "home"
-        | "case" | "reasons" => {
-            let plural = word.ends_with('s') && !matches!(word, "is");
+        | "case" | "reasons" | "people" => {
+            let plural = (word.ends_with('s') && !matches!(word, "is")) || word == "people";
             morphology.number = if plural { Number::Plur } else { Number::Sing };
             (
                 if plural { Pos::NNS } else { Pos::NN },
                 word.trim_end_matches('s').to_string(),
             )
+        }
+        _ if word.ends_with('s') && word.len() > 2 => {
+            morphology.number = Number::Plur;
+            (Pos::NNS, word.trim_end_matches('s').to_string())
         }
         _ if word.ends_with("ing") && word.len() > 4 => {
             morphology.verb_form = VerbForm::Ger;

@@ -1,5 +1,5 @@
 use conllu::{export, import_str};
-use english_rules::{pipeline::analyze, rulepack::RulePack};
+use english_rules::{evaluation::evaluate, pipeline::analyze, rulepack::RulePack};
 use parser_core::ids::TokenId;
 use parser_core::support::SourceRef;
 use std::env;
@@ -20,6 +20,7 @@ fn run() -> Result<(), String> {
     let mut validate = false;
     let mut digest = false;
     let mut retract = None;
+    let mut evaluation = false;
     let mut text = Vec::new();
 
     while let Some(arg) = args.next() {
@@ -38,12 +39,29 @@ fn run() -> Result<(), String> {
                 let value = args.next().ok_or("--retract-token requires an integer")?;
                 retract = Some(value.parse::<u32>().map_err(|_| "invalid token id")?);
             }
+            "--evaluation" => evaluation = true,
             value if value.starts_with('-') => return Err(format!("unknown option `{value}`")),
             value => text.push(value.to_string()),
         }
     }
 
     let pack = RulePack::builtin().map_err(|error| error.to_string())?;
+    if evaluation {
+        let report = evaluate(&pack);
+        println!(
+            "cases={} clean={} errors={} tp={} fp={} fn={} precision_micros={} recall_micros={} deterministic={}",
+            report.total,
+            report.clean,
+            report.errors,
+            report.true_positive,
+            report.false_positive,
+            report.false_negative,
+            report.precision_micros(),
+            report.recall_micros(),
+            report.deterministic
+        );
+        return Ok(());
+    }
     let mut analysis = if let Some(path) = conllu_input {
         let source = fs::read_to_string(path).map_err(|error| error.to_string())?;
         import_str(&source, &pack.id).map_err(|error| error.to_string())?
@@ -77,6 +95,6 @@ fn print_help() {
     println!(
         "Syntaxis M0/M1/M2 structural analysis\n\n\
 Usage:\n  syntaxis [OPTIONS] TEXT...\n  syntaxis --conllu-in FILE --conllu-out\n\n\
-Options:\n  --conllu-in FILE       import strict CoNLL-U instead of analyzing text\n  --conllu-out           emit canonical CoNLL-U\n  --validate             print structural validation issues\n  --digest               print the byte-stable analysis digest\n  --retract-token ID     retract one token analysis before output\n  -h, --help             show this help"
+Options:\n  --conllu-in FILE       import strict CoNLL-U instead of analyzing text\n  --conllu-out           emit canonical CoNLL-U\n  --validate             print structural validation issues\n  --digest               print the byte-stable analysis digest\n  --retract-token ID     retract one token analysis before output\n  --evaluation           run the frozen 500-case structural gate\n  -h, --help             show this help"
     );
 }

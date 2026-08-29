@@ -1,3 +1,4 @@
+pub mod evaluation;
 pub mod grammar;
 pub mod parser;
 pub mod pipeline;
