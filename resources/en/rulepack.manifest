@@ -155,6 +155,97 @@ supports = Gold annotations used as fixtures and evaluation references.
 blind_spots = Not a parser. Facts imported this way are marked with derivation kind `import` and must never be reported as engine output.
 precision_target = n/a
 
+[rule.ATTACH.ROOT.V1]
+stage = attach
+description = Select the deterministic clause root from the supported finite or main verb candidates.
+supports = Bounded declaratives and verbal clauses in the M1 fixture grammar.
+blind_spots = Complex coordination and non-projective clauses may remain unsupported.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.SUBJECT.V1]
+stage = attach
+description = Attach a supported nominal subject to the selected root.
+supports = Pre-root pronouns, nouns, and each/every determiners.
+blind_spots = Inversion, topicalization, and long-distance subject control.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.EXPLETIVE.V1]
+stage = attach
+description = Attach existential there to the nominal predicate head.
+supports = The existential there construction in the first-gate fixture set.
+blind_spots = Other expletive and weather-it constructions.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.AUXILIARY.V1]
+stage = attach
+description = Attach auxiliary and modal verbs to the selected verbal head.
+supports = English be, have, do, and modal auxiliary forms.
+blind_spots = Ambiguous lexical uses require contextual resolution.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.COPULA.V1]
+stage = attach
+description = Attach a be copula to a nominal predicate head.
+supports = Copular clauses with a nominal root.
+blind_spots = Adjectival and clausal copular complements are not yet resolved.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.DETERMINER.V1]
+stage = attach
+description = Attach a determiner to its following nominal head.
+supports = Determiners followed by a supported noun.
+blind_spots = Split noun phrases and post-nominal determiners.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.CASE.V1]
+stage = attach
+description = Attach a preposition as a case marker to its nominal complement.
+supports = Prepositions followed by a supported nominal.
+blind_spots = Complex prepositions and stranded prepositions.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.NMOD.V1]
+stage = attach
+description = Attach a nominal modifier through a following case marker.
+supports = Of-phrases in the motivating each-of construction.
+blind_spots = General nominal attachment ambiguity.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.OBJECT.V1]
+stage = attach
+description = Attach a supported post-root nominal as an object.
+supports = Simple transitive clauses.
+blind_spots = Passive, ditransitive, and object-control constructions.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.MODIFIER.V1]
+stage = attach
+description = Attach negation, adverbs, and adjectival modifiers using bounded local rules.
+supports = Basic negation, adverbial, and noun-modifying adjective positions.
+blind_spots = Scope and attachment ambiguity.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.COORDINATION.V1]
+stage = attach
+description = Attach a coordinating conjunction to the selected clause head.
+supports = Basic coordinating conjunction tokens.
+blind_spots = Conjunct head selection and shared arguments.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.PUNCTUATION.V1]
+stage = attach
+description = Attach punctuation to the selected root.
+supports = Punctuation tokens from the M0 tokenizer.
+blind_spots = Nested punctuation scope.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.ATTACH.UNSUPPORTED.V1]
+stage = attach
+description = Preserve an unsupported attachment explicitly instead of fabricating a relation.
+supports = Tokens for which no bounded attachment rule applies.
+blind_spots = This is a coverage boundary, not a parser-quality claim.
+precision_target = n/a
+
 [rule.POS.LEXICAL.V1]
 stage = pos
 description = Assign a Penn tag and observable morphology from the versioned English lexical inventory.

@@ -76,9 +76,13 @@ fn classify(token: &Token) -> (Pos, String, Morphology, &'static str) {
             morphology.number = Number::Sing;
             (Pos::DT, word.to_string())
         }
-        "all" | "many" | "few" | "several" | "some" | "any" | "no" => {
+        "all" | "some" | "any" | "no" => {
             morphology.det_kind = DetKind::Quantifier;
             (Pos::DT, word.to_string())
+        }
+        "many" | "few" | "several" => {
+            morphology.det_kind = DetKind::Quantifier;
+            (Pos::JJ, word.to_string())
         }
         "i" | "me" | "we" | "us" | "you" | "he" | "him" | "she" | "her" | "it" | "they"
         | "them" => {
