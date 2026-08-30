@@ -23,8 +23,10 @@
       <button id="analyze">Analyze text</button>
       <button id="digest">Digest text</button>
       <button id="conllu">Import CoNLL-U</button>
+      <button id="sample">Valid CoNLL-U sample</button>
       <button id="empty">Empty input</button>
       <button id="unicode">Unicode input</button>
+      <button id="large">Oversized input</button>
     </div>
     <pre id="output" aria-live="polite"></pre>
 
@@ -48,8 +50,13 @@
       document.querySelector("#analyze").onclick = () => run(() => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2));
       document.querySelector("#digest").onclick = () => run(() => digest(input.value));
       document.querySelector("#conllu").onclick = () => run(() => JSON.stringify(JSON.parse(import_conllu_json(input.value)), null, 2));
+      document.querySelector("#sample").onclick = () => {
+        input.value = "# sent_id = 1\n# text = Cats sleep.\n1\tCats\tcat\tNOUN\tNN\tNumber=Plur\t2\tnsubj\t_\t_\n2\tsleep\tsleep\tVERB\tVBP\t_\t0\troot\t_\t_\n3\t.\t.\tPUNCT\t.\t_\t2\tpunct\t_\t_\n";
+        run(() => JSON.stringify(JSON.parse(import_conllu_json(input.value)), null, 2));
+      };
       document.querySelector("#empty").onclick = () => { input.value = ""; run(() => analyze_json(input.value)); };
       document.querySelector("#unicode").onclick = () => { input.value = "The café — déjà vu."; run(() => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2)); };
+      document.querySelector("#large").onclick = () => { input.value = "a".repeat(131073); run(() => analyze_json(input.value)); };
       run(() => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2));
     </script>
   </body>
