@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
+## 0.1.0 - 2026-08-30
+
 - Declared and tested `GRAMMAR.AGREEMENT.SUBJECT_VERB_PERSON.V1` for known-person
   subject/finite mismatches. Unknown person is left silent.
 - Narrowed negation placement so an accepted `do` auxiliary is a host for `not`,
@@ -28,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   not depend on the repository checkout.
 - Added an optional `wasm` feature with `wasm-bindgen` exports for canonical JSON
   analysis, digests, and strict CoNLL-U import.
+- Added Rust, CLI, Wasm, CoNLL-U, and graph-level usage examples for functional
+  integration review.
 
 - Initial release-shaped API for deterministic, offline English structural
   analysis.
