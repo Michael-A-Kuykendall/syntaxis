@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   not unique to third person. The CoNLL-U gold fixture is unchanged. No
   `analysis_version`, rule-pack version, or mapping-version bump: the serialized
   model shape is the same.
+- Live morphology for `have` likewise leaves person unknown because the form is
+  shared by first, second, and plural third-person subjects.
 - Consolidated the implementation into one publishable `syntaxis` package with
   `parser_core`, `english_rules`, and `conllu` library modules plus the
   `syntaxis` binary.

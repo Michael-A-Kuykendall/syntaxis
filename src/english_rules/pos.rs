@@ -168,7 +168,6 @@ fn classify(token: &Token) -> (Pos, String, Morphology, &'static str) {
         "have" | "do" => {
             if word == "have" {
                 morphology.number = Number::Plur;
-                morphology.person = Person::Third;
             }
             morphology.verb_form = VerbForm::Fin;
             morphology.tense = Tense::Pres;
@@ -297,6 +296,18 @@ mod tests {
             .find(|item| analysis.surface_of(item.token) == Some("are"))
             .unwrap();
         assert!(!are.morphology.person.is_known());
+    }
+
+    #[test]
+    fn have_does_not_claim_a_unique_person() {
+        let pack = RulePack::builtin().unwrap();
+        let analysis = analyze("I have sleeping.", &pack);
+        let have = analysis
+            .token_analyses
+            .values()
+            .find(|item| analysis.surface_of(item.token) == Some("have"))
+            .unwrap();
+        assert!(!have.morphology.person.is_known());
     }
 
     #[test]

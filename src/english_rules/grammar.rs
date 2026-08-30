@@ -390,6 +390,9 @@ mod tests {
             .find(|analysis| unknown_noun.surface_of(analysis.token) == Some("cat"))
             .unwrap();
         assert!(!cat.morphology.person.is_known());
+
+        let ambiguous_have = analyze("I have sleeping.", &pack());
+        assert!(!has_key(&ambiguous_have, PERSON_MESSAGE));
     }
 
     #[test]
