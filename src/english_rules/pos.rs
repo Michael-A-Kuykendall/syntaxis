@@ -129,11 +129,11 @@ fn classify(token: &Token) -> (Pos, String, Morphology, &'static str) {
             } else {
                 Number::Plur
             };
-            morphology.person = if word == "am" {
-                Person::First
-            } else {
-                Person::Third
-            };
+            // `are` is used with second person and with plural subjects.
+            // Person stays unknown so agreement cannot invent a unique person.
+            if word == "am" {
+                morphology.person = Person::First;
+            }
             morphology.tense = Tense::Pres;
             morphology.verb_form = VerbForm::Fin;
             (Pos::VBP, "be".to_string())
@@ -285,6 +285,18 @@ mod tests {
         assert!(values.contains(&("are", Pos::VBP, Number::Plur)));
         assert!(values.contains(&("students", Pos::NNS, Number::Plur)));
         assert!(values.contains(&("There", Pos::EX, Number::Unknown)));
+    }
+
+    #[test]
+    fn are_does_not_claim_a_unique_person() {
+        let pack = RulePack::builtin().unwrap();
+        let analysis = analyze("You are sleeping.", &pack);
+        let are = analysis
+            .token_analyses
+            .values()
+            .find(|item| analysis.surface_of(item.token) == Some("are"))
+            .unwrap();
+        assert!(!are.morphology.person.is_known());
     }
 
     #[test]
