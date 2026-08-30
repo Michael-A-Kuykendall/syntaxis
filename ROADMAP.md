@@ -44,6 +44,46 @@ The first structural gate passes. Expansion now chooses among more
 constructions, a better lexicon, or selected external resources; each addition
 requires new frozen fixtures and explicit provenance.
 
+## Post-v0.1 grammar priorities
+
+Rank reflects consumer value multiplied by fit with the current deterministic
+pipeline. Each item is a separate implementation slice, not a promise of broad
+coverage. No item is advertised until its fixture and criterion pass.
+
+1. **Auxiliary chains and do-support.** Extend accepted `aux` evidence for
+   `be`, `have`, and `do` without rewriting the sentence. Freeze clean and
+   hostless-negation cases in `fixtures/expansion_auxiliary.conllu`; require
+   exact relation status, placement diagnostic kind, and complete provenance.
+2. **Basic clausal complements.** Add one resolved verb-complement shape using
+   an existing relation, with no control or semantic inference. Freeze one
+   clean, one incompatible-form, and one unsupported-attachment case in
+   `fixtures/expansion_complement.conllu`; require the unsupported case to
+   remain explicit and the 500-case gate to remain unchanged.
+3. **Nominal and clause coordination.** Separate resolved nominal `conj` from
+   shared-argument and clause coordination. Freeze agreement-clean,
+   agreement-error, and ambiguous-scope cases in
+   `fixtures/expansion_coordination.conllu`; require no diagnostic from an
+   alternative or unsupported arc.
+4. **Subordination.** Support one bounded marker-plus-clause shape only after
+   the parser can supply accepted evidence. Freeze marker attachment and
+   sentence-scope cases in `fixtures/expansion_subordination.conllu`; require
+   deterministic arcs, retraction coverage, and no fabricated clause relation.
+5. **Questions and passive/copular variants.** Choose one of these only after
+   priorities 1-4 establish the required auxiliary and clause evidence. Freeze
+   paired clean/error examples in a construction-specific fixture; require
+   exact diagnostic labels, stable JSON/digest, and a measured held-out result.
+
+Deferred until the prerequisites or evidence exist:
+
+- Person on ambiguous verb forms (`have`, `do`, `was`) because the surface form
+  does not uniquely encode person.
+- Infinitival `to` diagnostics until an accepted `mark` relation is emitted by
+  the parser for the supported construction.
+- Broadening the 500-case gate until a licensed held-out corpus and hand-written
+  expected labels exist.
+- Full phrase/chunk boundaries, semantic role labeling, and general attachment
+  ambiguity because they exceed the current structural contract.
+
 Deferred follow-up from the first-slice expansion:
 
 - Person on ambiguous verb forms other than `are` (`have`, `do`, `was`)
