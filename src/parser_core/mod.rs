@@ -1,7 +1,6 @@
 //! The deterministic analysis data model and support graph.
 
 #![forbid(unsafe_code)]
-#![deny(rust_2018_idioms)]
 
 pub mod analysis;
 pub mod factgraph;

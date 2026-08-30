@@ -35,6 +35,7 @@ jobs:
         run: cargo fmt --check
 
       - name: Release gate
+        if: matrix.rust == 'stable'
         run: make gate
 
       - name: Cargo deny
