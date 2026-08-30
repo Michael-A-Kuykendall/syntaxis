@@ -42,13 +42,13 @@ demo:
 checksums:
 	@sha256sum resources/en/*.txt
 
-# Gate 1 and the automated parts of Gate 2. The honesty and provenance gates
+# Gate 1 and the automated parts of Gate 2. The contract and provenance gates
 # are human review by design and are not automatable.
 gate: fmt-check lint test
-	@echo "--- dependency count (must be zero) ---"
-	@cargo tree --depth 1 | tail -n +2 | grep -v '^$$' || echo "   none"
+	@echo "--- default native dependency surface ---"
+	@cargo tree --depth 1 --no-default-features
 	@echo "--- nondeterministic collections in source (justify each hit) ---"
-	@! grep -rn "HashMap\|HashSet" src || true
+	@! grep -rn "HashMap\|HashSet" src
 	@echo "--- clock, rng, network, env in source (must be empty) ---"
 	@! grep -rn "SystemTime\|Instant::now\|rand::\|std::env::var\|TcpStream" src
 	@echo "gate: automated checks complete; now walk RELEASE_GATES_CHECKLIST.md"
