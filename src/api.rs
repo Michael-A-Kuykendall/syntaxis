@@ -1,6 +1,6 @@
 //! Small, I/O-free API boundary for native and browser consumers.
 
-use crate::conllu::import_str;
+use crate::conllu::{export, import_str};
 use crate::english_rules::{pipeline::analyze, rulepack::RulePack};
 use std::fmt;
 
@@ -57,6 +57,12 @@ pub fn import_conllu_json(input: &str) -> Result<String, ApiError> {
         .map_err(|error| ApiError::Conllu(error.to_string()))
 }
 
+/// Analyze plain English text and export the resulting snapshot as CoNLL-U.
+pub fn analyze_conllu(text: &str) -> Result<String, ApiError> {
+    let pack = builtin_pack()?;
+    Ok(export(&analyze_checked(text, &pack)?))
+}
+
 fn builtin_pack() -> Result<RulePack, ApiError> {
     RulePack::builtin().map_err(|error| ApiError::RulePack(error.to_string()))
 }
@@ -97,6 +103,7 @@ mod tests {
         let text = "The cat are sleeping.";
         assert_eq!(analyze_json(text), analyze_json(text));
         assert_eq!(digest(text), digest(text));
+        assert!(analyze_conllu(text).unwrap().contains("\troot\t"));
     }
 
     #[test]

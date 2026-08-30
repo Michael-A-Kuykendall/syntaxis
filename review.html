@@ -23,6 +23,7 @@
     <p id="expectation">Expected: JSON containing one agreement diagnostic.</p>
     <div>
       <button id="analyze">Analyze text</button>
+      <button id="export">Export analyzed text as CoNLL-U</button>
       <button id="digest">Digest text</button>
       <button id="conllu">Import current as CoNLL-U</button>
       <button id="sample">Import built-in valid CoNLL-U sample</button>
@@ -33,7 +34,7 @@
     <pre id="output" aria-live="polite"></pre>
 
     <script type="module">
-      import init, { analyze_json, digest, import_conllu_json } from "./pkg/syntaxis.js";
+      import init, { analyze_conllu, analyze_json, digest, import_conllu_json } from "./pkg/syntaxis.js";
 
       const input = document.querySelector("#input");
       const output = document.querySelector("#output");
@@ -51,6 +52,7 @@
       await init();
       status.textContent = "Wasm loaded. Review the API behavior below.";
       document.querySelector("#analyze").onclick = () => run("JSON containing one agreement diagnostic", () => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2));
+      document.querySelector("#export").onclick = () => run("CoNLL-U exported from analyzed text", () => analyze_conllu(input.value));
       document.querySelector("#digest").onclick = () => run("a 64-character hexadecimal digest", () => digest(input.value));
       document.querySelector("#conllu").onclick = () => run("a precise malformed-CoNLL-U error, unless the input is valid CoNLL-U", () => JSON.stringify(JSON.parse(import_conllu_json(input.value)), null, 2));
       document.querySelector("#sample").onclick = () => {

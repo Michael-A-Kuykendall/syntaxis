@@ -17,6 +17,11 @@ pub fn import_conllu_json(input: &str) -> Result<String, JsValue> {
     crate::api::import_conllu_json(input).map_err(|error| JsValue::from_str(&error.to_string()))
 }
 
+#[wasm_bindgen]
+pub fn analyze_conllu(text: &str) -> Result<String, JsValue> {
+    crate::api::analyze_conllu(text).map_err(|error| JsValue::from_str(&error.to_string()))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -27,6 +32,9 @@ mod tests {
         let json = analyze_json("The cat are sleeping.").unwrap();
         assert!(json.contains("The cat are sleeping."));
         assert_eq!(digest("The cat are sleeping.").unwrap().len(), 64);
+        assert!(analyze_conllu("The cat are sleeping.")
+            .unwrap()
+            .contains("\troot\t"));
     }
 
     #[wasm_bindgen_test]

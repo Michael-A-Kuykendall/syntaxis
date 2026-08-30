@@ -38,6 +38,7 @@ pipelines that need reproducible and inspectable English structure.
 | Strict CoNLL-U import/export | Supported with explicit unsupported mapping | `src/conllu/`; `tests/conllu_roundtrip.rs` |
 | Rust consumer API | Supported | `src/api.rs`; rustdoc and API tests |
 | JavaScript/Wasm consumer API | Supported with optional `wasm` feature | `src/wasm.rs`; `wasm-pack test --node` |
+| Wasm CoNLL-U export | Supported for analyzed text | `analyze_conllu(text)`; Wasm smoke test |
 | 500-case structural evaluation gate | Supported as a construction gate | `src/english_rules/evaluation.rs` |
 
 ## Explicit Boundaries

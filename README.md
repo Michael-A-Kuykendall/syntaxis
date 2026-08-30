@@ -34,8 +34,8 @@ JavaScript through `wasm-bindgen`:
 wasm-pack build --target web --features wasm
 ```
 
-The generated module exports `analyze_json(text)`, `digest(text)`, and
-`import_conllu_json(input)`. Each returns a deterministic string or a
+The generated module exports `analyze_json(text)`, `digest(text)`,
+`analyze_conllu(text)`, and `import_conllu_json(input)`. Each returns a deterministic string or a
 deterministic error. Inputs are limited to 128 KiB; filesystem-based CLI
 options are not part of the browser API.
 
