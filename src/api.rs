@@ -28,16 +28,27 @@ impl fmt::Display for ApiError {
     }
 }
 
+impl std::error::Error for ApiError {}
+
+/// Analyze plain English text and return canonical JSON.
+///
+/// The input is bounded by [`MAX_INPUT_BYTES`]. This function performs the
+/// engine analysis; it does not read files or import an external annotation.
 pub fn analyze_json(text: &str) -> Result<String, ApiError> {
     let pack = builtin_pack()?;
     Ok(analyze_checked(text, &pack)?.to_canonical_json())
 }
 
+/// Analyze plain English text and return its canonical-output digest.
 pub fn digest(text: &str) -> Result<String, ApiError> {
     let pack = builtin_pack()?;
     Ok(analyze_checked(text, &pack)?.digest())
 }
 
+/// Import strict CoNLL-U and return the imported analysis as canonical JSON.
+///
+/// Imported annotations are preserved and marked as imported evidence; grammar
+/// diagnostics are not inferred from the imported rows.
 pub fn import_conllu_json(input: &str) -> Result<String, ApiError> {
     check_input(input)?;
     let pack = builtin_pack()?;
