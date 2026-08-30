@@ -453,6 +453,22 @@ mod tests {
     }
 
     #[test]
+    fn named_coordination_limitation_fixture_stays_explicit() {
+        for line in include_str!("../../fixtures/coordination_limitations.txt")
+            .lines()
+            .filter(|line| !line.is_empty() && !line.starts_with('#'))
+        {
+            let (_, text) = line.split_once('|').unwrap();
+            let analysis = analyze(text, &pack());
+            assert!(!has_key(&analysis, COORDINATION_MESSAGE));
+            assert!(analysis
+                .arcs
+                .values()
+                .all(|arc| arc.relation != Relation::Conj || arc.status != ArcStatus::Accepted));
+        }
+    }
+
+    #[test]
     fn diagnostics_retract_with_supporting_arc() {
         let mut analysis = analyze("The cat are sleeping.", &pack());
         let diagnostic = analysis.diagnostics.values().next().unwrap().id;
