@@ -6,6 +6,10 @@ access. A rule is not complete when it produces a plausible message; it is
 complete when its contract, evidence, limitations, and deterministic regression
 behavior are all checked in.
 
+Codex / agent invocation: `$grammar-rule-authoring`
+(`.agents/skills/grammar-rule-authoring/SKILL.md`). Keep that skill and this
+document aligned.
+
 ## Rule Boundary
 
 Grammar rules consume the existing `Analysis` snapshot. They do not re-tokenize,

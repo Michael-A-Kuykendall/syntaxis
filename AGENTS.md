@@ -2,6 +2,8 @@
 
 This project uses **bd** (beads) for issue tracking. Run `bd prime` for full workflow context.
 
+English grammar diagnostics use the skill at `.agents/skills/grammar-rule-authoring/SKILL.md`. Invoke it with `$grammar-rule-authoring`. The human playbook is [docs/GRAMMAR_RULE_AUTHORING.md](docs/GRAMMAR_RULE_AUTHORING.md).
+
 > **Architecture in one line:** Issues live in a local Dolt database
 > (`.beads/dolt/`); cross-machine sync uses `bd dolt push/pull` (a
 > git-compatible protocol), stored under `refs/dolt/data` on your git
