@@ -42,6 +42,9 @@ options are not part of the browser API.
 See [the capability matrix](docs/CAPABILITY_MATRIX.md) for the supported
 construction boundary, evidence, and explicit non-goals.
 
+See [usage examples](docs/USAGE_EXAMPLES.md) for Rust, CLI, Wasm, CoNLL-U, and
+graph-level integration flows.
+
 ## What's in the box
 
 | crate | contains |
