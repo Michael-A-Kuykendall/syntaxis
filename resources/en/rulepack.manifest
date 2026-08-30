@@ -260,13 +260,6 @@ supports = Pronoun subjects and finite forms whose person is uniquely known, suc
 blind_spots = Nouns without person features, and verb forms that do not uniquely encode person, including are.
 precision_target = not yet measured; set after the frozen-corpus baseline
 
-[rule.GRAMMAR.AGREEMENT.SUBJECT_VERB_PERSON.V1]
-stage = grammar
-description = Compare known subject and finite-verb person over resolved dependency supports.
-supports = First- and third-person subject/finite-verb agreement when both token analyses provide known person.
-blind_spots = Unknown-person nouns and pronouns, unresolved alternatives, and agreement without known morphology.
-precision_target = not yet measured; set after the frozen-corpus baseline
-
 [rule.GRAMMAR.DETERMINER.ARTICLE_NUMBER.V1]
 stage = grammar
 description = Detect an indefinite singular article attached to a plural noun.
@@ -279,13 +272,6 @@ stage = grammar
 description = Require a participle after the auxiliary have in the bounded verb chain.
 supports = Basic have plus finite or participial verb chains where verb form is known.
 blind_spots = Perfect constructions with unresolved lexical ambiguity or unknown verb form.
-precision_target = not yet measured; set after the frozen-corpus baseline
-
-[rule.GRAMMAR.VERB_FORM.TO_INFINITIVE.V1]
-stage = grammar
-description = Flag an accepted infinitival to marker whose verbal head has a known gerund or participle form.
-supports = to plus a following verb attached by an accepted mark relation.
-blind_spots = Prepositional to, unknown verb form after to, and xcomp/control constructions the parser does not attach.
 precision_target = not yet measured; set after the frozen-corpus baseline
 
 [rule.GRAMMAR.PLACEMENT.NEGATION.V1]
