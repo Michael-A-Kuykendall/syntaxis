@@ -34,7 +34,7 @@ cargo test parser_core --offline            # core module tests
 cargo run --example demo                   # live tokenize/import/retract demo
 cargo clippy --all-targets -- -D warnings
 cargo fmt --check
-cargo deny check                           # licences and bans (needs pinned cargo-deny)
+cargo deny check                           # licences and bans (cargo-deny 0.18.5)
 make gate                                  # the full pre-release gate
 ```
 

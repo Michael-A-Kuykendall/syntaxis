@@ -49,4 +49,4 @@ jobs:
 
       - name: Cargo deny
         if: matrix.rust == 'stable'
-        run: cargo install cargo-deny --locked && cargo deny check
+        run: cargo install cargo-deny --version 0.18.5 --locked && cargo deny check
