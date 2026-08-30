@@ -5,19 +5,19 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
 
-Deterministic, offline English structural analysis. Rust, with a **zero-runtime-
-dependency native build** — no model weights, no Python, no C++, no network, no
-wall-clock, no RNG.
+Deterministic, offline English structural analysis for Rust, Wasm, and data
+pipelines.
 
-Syntaxis is a **deterministic English structural-analysis engine**. It tokenizes,
-segments, and lays out the grammatical structure of an English sentence and
-emits a single, byte-for-byte reproducible result — with every fact traced back
-to the rule that produced it. It is built to be **auditable**: same input, same
-rules, same bytes, every time.
+Syntaxis is a **structural-analysis engine**, not a general proofreading tool.
+Given bounded English text, it produces one versioned analysis containing
+tokens, morphology, dependency arcs, grammar diagnostics, provenance, and a
+stable digest. Given strict CoNLL-U, it validates and preserves the supplied
+annotations without pretending that import is parsing.
 
-This is a pure-Rust crate, built to work the same way on your machine, on a
-server, and in a browser. No model weights. No runtime that needs to phone
-home. No hidden state that makes results irreproducible.
+The product is for software that needs inspectable structure and reproducible
+bytes: same input, same declared rules, same result. The native feature set has
+no runtime dependencies, no model weights, no network, no clock, and no RNG.
+The optional Wasm feature provides the same contract to JavaScript.
 
 ```
 cargo test                          # full test suite, no network needed
@@ -97,12 +97,13 @@ exactly its surface.
 
 ## Current scope
 
-Syntaxis is a foundation engine in active development. The current release
-implements the core substrate plus the first structural slices:
+The current release is a foundation engine with a deliberately bounded first
+grammar slice:
 
 - deterministic lexical analysis (segmentation and tokenization);
 - bounded dependency attachment over a native UD relation set;
-- provenance-backed grammar diagnostics;
+- provenance-backed agreement, determiner, verb-form, negation-placement, and
+  resolved-coordination diagnostics;
 - strict CoNLL-U import/export with a versioned Penn↔UD projection.
 
 What is **not** in scope yet, and is deliberately tracked as future work rather
@@ -112,12 +113,12 @@ than claimed as a feature:
   reported rather than guessed;
 - complete dependency parsing — the engine emits explicit unsupported arcs
   outside its declared construction set;
-- full grammar coverage beyond agreement, determiner, verb-form, and
-  negation-placement diagnostics;
+- complete English grammar or dependency parsing;
 - natural-language coverage beyond the construction-focused 500-case
   evaluation gate;
 - NFC/NFD normalization, which needs either a dependency or a large embedded
-  table, recorded as a known gap.
+  table;
+- browser filesystem access, an HTTP service, or a bundled end-user interface.
 
 ## CLI
 
