@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Syntaxis Wasm Review</title>
+    <style>
+      :root { color-scheme: dark; font: 16px system-ui, sans-serif; }
+      body { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; background: #10141b; color: #e8edf5; }
+      textarea, pre { box-sizing: border-box; width: 100%; border: 1px solid #394454; border-radius: 6px; background: #171e28; color: inherit; padding: 1rem; }
+      textarea { min-height: 8rem; font: 1rem ui-monospace, monospace; }
+      pre { min-height: 12rem; overflow: auto; white-space: pre-wrap; }
+      button { margin: .75rem .5rem .75rem 0; padding: .55rem .8rem; border: 1px solid #7187a5; border-radius: 5px; background: #24344b; color: inherit; cursor: pointer; }
+      button:hover { background: #315071; }
+      .status { color: #9eb7d6; }
+    </style>
+  </head>
+  <body>
+    <h1>Syntaxis Wasm Review</h1>
+    <p class="status" id="status">Loading the generated Wasm module...</p>
+    <textarea id="input" aria-label="Input">The cat are sleeping.</textarea>
+    <div>
+      <button id="analyze">Analyze text</button>
+      <button id="digest">Digest text</button>
+      <button id="conllu">Import CoNLL-U</button>
+      <button id="empty">Empty input</button>
+      <button id="unicode">Unicode input</button>
+    </div>
+    <pre id="output" aria-live="polite"></pre>
+
+    <script type="module">
+      import init, { analyze_json, digest, import_conllu_json } from "./pkg/syntaxis.js";
+
+      const input = document.querySelector("#input");
+      const output = document.querySelector("#output");
+      const status = document.querySelector("#status");
+
+      function run(operation) {
+        try {
+          output.textContent = operation();
+        } catch (error) {
+          output.textContent = `Error: ${String(error)}`;
+        }
+      }
+
+      await init();
+      status.textContent = "Wasm loaded. Review the API behavior below.";
+      document.querySelector("#analyze").onclick = () => run(() => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2));
+      document.querySelector("#digest").onclick = () => run(() => digest(input.value));
+      document.querySelector("#conllu").onclick = () => run(() => JSON.stringify(JSON.parse(import_conllu_json(input.value)), null, 2));
+      document.querySelector("#empty").onclick = () => { input.value = ""; run(() => analyze_json(input.value)); };
+      document.querySelector("#unicode").onclick = () => { input.value = "The café — déjà vu."; run(() => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2)); };
+      run(() => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2));
+    </script>
+  </body>
+</html>
