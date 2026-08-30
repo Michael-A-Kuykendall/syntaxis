@@ -25,10 +25,11 @@ pipelines that need reproducible and inspectable English structure.
 | Deterministic POS and morphology | Supported lexical/suffix inventory | `src/english_rules/pos.rs`; manifest `POS.*` rules |
 | Bounded dependency attachment | Supported declared UD relations | `src/english_rules/parser.rs`; manifest `ATTACH.*` rules |
 | Explicit unsupported structures | Supported contract | `Relation::Unsupported`; `ATTACH.UNSUPPORTED.V1` |
-| Agreement diagnostics | Supported first grammar slice | `src/english_rules/grammar.rs`; evaluation gate |
+| Number agreement diagnostics | Supported first grammar slice | `GRAMMAR.AGREEMENT.SUBJECT_VERB.V1`; evaluation gate |
+| Person agreement diagnostics | Supported when both persons are known | `GRAMMAR.AGREEMENT.SUBJECT_VERB_PERSON.V1` |
 | Determiner diagnostics | Supported `a/an` plus plural noun case | `GRAMMAR.DETERMINER.ARTICLE_NUMBER.V1` |
-| Verb-form diagnostics | Supported bounded `have` chain case | `GRAMMAR.VERB_FORM.HAVE_PARTICIPLE.V1` |
-| Negation-placement diagnostics | Supported hostless simple-negation case | `GRAMMAR.PLACEMENT.NEGATION.V1` |
+| Verb-form diagnostics | Supported `have`+participle and `to`+gerund/participle | `GRAMMAR.VERB_FORM.HAVE_PARTICIPLE.V1`; `GRAMMAR.VERB_FORM.TO_INFINITIVE.V1` |
+| Negation-placement diagnostics | Supported hostless `not` when no accepted aux/cop host exists | `GRAMMAR.PLACEMENT.NEGATION.V1` |
 | Coordination diagnostics | Supported when a resolved `conj` arc exists | `GRAMMAR.AGREEMENT.COORDINATION.V1` |
 | Provenance and support tracking | Supported on derived facts | `src/parser_core/support.rs`; integration tests |
 | Retraction cascade | Supported for dependent facts | `src/parser_core/factgraph.rs`; pipeline tests |
@@ -56,6 +57,8 @@ pipelines that need reproducible and inspectable English structure.
 | Browser filesystem or CLI flags | Not part of the Wasm API |
 | Unbounded document processing | Not supported; consumer API input is limited to 128 KiB |
 | CoNLL-U import as grammar inference | Not supported; import preserves supplied annotations |
+| Person on ambiguous verb forms | `are` leaves person unknown; `have`/`do` person remains a follow-up |
+| Shared-argument coordination | Left unclaimed unless an accepted `conj` arc exists |
 
 ## Evidence Rules
 
