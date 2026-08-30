@@ -3,6 +3,7 @@ use syntaxis::parser_core::ids::{RulePackId, TokenId};
 use syntaxis::parser_core::model::{ArcStatus, Relation};
 
 const FIXTURE: &str = include_str!("../fixtures/challenge_agreement.conllu");
+const FIXTURE_DIGEST: &str = "084f30bcfd3743f57b554316e4acd75575bdd8d4c4371234359a25e367f1e7ec";
 
 fn pack() -> RulePackId {
     RulePackId::new("en-core@0.1.0")
@@ -75,4 +76,10 @@ fn import_is_deterministic_and_export_is_idempotent() {
     assert_eq!(a.digest(), b.digest());
     let once = export(&a);
     assert_eq!(export(&import_str(&once, &pack()).unwrap()), once);
+}
+
+#[test]
+fn fixture_digest_matches_recorded_value() {
+    let analysis = import_str(FIXTURE, &pack()).unwrap();
+    assert_eq!(analysis.digest(), FIXTURE_DIGEST);
 }
