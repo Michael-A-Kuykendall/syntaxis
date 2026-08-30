@@ -18,13 +18,14 @@
   <body>
     <h1>Syntaxis Wasm Review</h1>
     <p class="status" id="status">Loading the generated Wasm module...</p>
+    <label for="input"><strong>Input</strong> <span id="input-help">Plain text for analysis.</span></label>
     <textarea id="input" aria-label="Input">The cat are sleeping.</textarea>
     <p id="expectation">Expected: JSON containing one agreement diagnostic.</p>
     <div>
       <button id="analyze">Analyze text</button>
       <button id="digest">Digest text</button>
-      <button id="conllu">Import CoNLL-U</button>
-      <button id="sample">Valid CoNLL-U sample</button>
+      <button id="conllu">Import current as CoNLL-U</button>
+      <button id="sample">Load and import valid CoNLL-U</button>
       <button id="empty">Empty input</button>
       <button id="unicode">Unicode input</button>
       <button id="large">Oversized input</button>
@@ -50,14 +51,15 @@
       status.textContent = "Wasm loaded. Review the API behavior below.";
       document.querySelector("#analyze").onclick = () => run("JSON containing one agreement diagnostic", () => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2));
       document.querySelector("#digest").onclick = () => run("a 64-character hexadecimal digest", () => digest(input.value));
-      document.querySelector("#conllu").onclick = () => run("a precise malformed-CoNLL-U error", () => JSON.stringify(JSON.parse(import_conllu_json(input.value)), null, 2));
+      document.querySelector("#conllu").onclick = () => run("a precise malformed-CoNLL-U error, unless the input is valid CoNLL-U", () => JSON.stringify(JSON.parse(import_conllu_json(input.value)), null, 2));
       document.querySelector("#sample").onclick = () => {
         input.value = "# sent_id = 1\n# text = Cats sleep.\n1\tCats\tcat\tNOUN\tNN\tNumber=Plur\t2\tnsubj\t_\t_\n2\tsleep\tsleep\tVERB\tVBP\t_\t0\troot\t_\tSpaceAfter=No\n3\t.\t.\tPUNCT\t.\t_\t2\tpunct\t_\t_\n";
-        run("JSON for one imported sentence", () => JSON.stringify(JSON.parse(import_conllu_json(input.value)), null, 2));
+        document.querySelector("#input-help").textContent = "CoNLL-U; import preserves supplied annotations and does not infer grammar diagnostics.";
+        run("JSON for one imported sentence; no analyzer diagnostics are expected", () => JSON.stringify(JSON.parse(import_conllu_json(input.value)), null, 2));
       };
-      document.querySelector("#empty").onclick = () => { input.value = ""; run("an input must not be empty error", () => analyze_json(input.value)); };
-      document.querySelector("#unicode").onclick = () => { input.value = "The café — déjà vu."; run("JSON without a Unicode or span error", () => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2)); };
-      document.querySelector("#large").onclick = () => { input.value = "a".repeat(131073); run("an input-too-large error", () => analyze_json(input.value)); };
+      document.querySelector("#empty").onclick = () => { input.value = ""; document.querySelector("#input-help").textContent = "Plain text for analysis."; run("an input must not be empty error", () => analyze_json(input.value)); };
+      document.querySelector("#unicode").onclick = () => { input.value = "The café — déjà vu."; document.querySelector("#input-help").textContent = "Plain text for analysis."; run("JSON without a Unicode or span error", () => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2)); };
+      document.querySelector("#large").onclick = () => { input.value = "a".repeat(131073); document.querySelector("#input-help").textContent = "Plain text for analysis."; run("an input-too-large error", () => analyze_json(input.value)); };
       run("JSON containing one agreement diagnostic", () => JSON.stringify(JSON.parse(analyze_json(input.value)), null, 2));
     </script>
   </body>
