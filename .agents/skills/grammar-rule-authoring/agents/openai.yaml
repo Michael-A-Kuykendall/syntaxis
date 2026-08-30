@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grammar Rule Authoring"
+  short_description: "Add one English grammar rule to Syntaxis"
+  default_prompt: "Use $grammar-rule-authoring to add one English grammar rule from its Beads issue through contract, manifest, fixtures, tests, and make gate."
