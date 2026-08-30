@@ -130,6 +130,9 @@ impl Analysis {
     /// Certainty a derived item must carry, given what it rests on.
     ///
     /// A result may never be more certain than its least certain support.
+    /// Token and token-analysis references identify observed facts but carry no
+    /// independent uncertainty; unresolved structure is represented by arcs or
+    /// alternative groups and is what lowers certainty.
     pub fn certainty_for(&self, sources: &[SourceRef]) -> Certainty {
         let mut certainty = Certainty::Definite;
         for source in sources {
