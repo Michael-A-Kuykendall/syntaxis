@@ -48,9 +48,9 @@ gate: fmt-check lint test
 	@echo "--- dependency count (must be zero) ---"
 	@cargo tree --depth 1 | tail -n +2 | grep -v '^$$' || echo "   none"
 	@echo "--- nondeterministic collections in source (justify each hit) ---"
-	@! grep -rn "HashMap\|HashSet" crates/*/src || true
+	@! grep -rn "HashMap\|HashSet" src || true
 	@echo "--- clock, rng, network, env in source (must be empty) ---"
-	@! grep -rn "SystemTime\|Instant::now\|rand::\|std::env::var\|TcpStream" crates/*/src
+	@! grep -rn "SystemTime\|Instant::now\|rand::\|std::env::var\|TcpStream" src
 	@echo "gate: automated checks complete; now walk RELEASE_GATES_CHECKLIST.md"
 
 clean:

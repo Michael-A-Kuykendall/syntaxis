@@ -66,7 +66,7 @@ This gate has no automated substitute. Read the diff.
 - [ ] Breaking output changes flagged as breaking, even with no API change
 - [ ] `README.md` "Not done yet" section still true
 - [ ] `ROADMAP.md` milestone boxes reflect reality
-- [ ] `cargo publish --dry-run` clean for each crate, in dependency order
+- [ ] `cargo publish --dry-run` clean for the `syntaxis` package
 
 ## Gate 7 — Claims
 

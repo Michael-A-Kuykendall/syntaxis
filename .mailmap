@@ -2,3 +2,6 @@
 # do not show the same person three times.
 # Format:  Proper Name <proper@email>  <other@email>
 Michael A. Kuykendall <michaelallenkuykendall@gmail.com>
+Michael A. Kuykendall <michaelallenkuykendall@gmail.com> Michael <michael@local>
+Michael A. Kuykendall <michaelallenkuykendall@gmail.com> Michael A. Kuykendall <michael@kuykendall.com>
+Michael A. Kuykendall <michaelallenkuykendall@gmail.com> Michael Kuykendall <michael@example.com>

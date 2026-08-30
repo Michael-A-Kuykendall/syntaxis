@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
-- Added publishable crate metadata, including README and Apache-2.0 license
-  files for each workspace package.
-- Included the checksummed English rule-pack artifacts in the `english-rules`
-  package so published tarballs build without the repository checkout.
+- Consolidated the implementation into one publishable `syntaxis` package with
+  `parser_core`, `english_rules`, and `conllu` library modules plus the
+  `syntaxis` binary.
+- Added the checksummed English rule-pack artifacts to the package so builds do
+  not depend on the repository checkout.
+
+## 0.1.0
+
+- Initial release-shaped API for deterministic, offline English structural
+  analysis.
+- The crate name is intentionally `syntaxis`; the Rust package and command-line
+  application share that name, while the README describes this project as the
+  zero-dependency Rust structural-analysis engine to distinguish it from
+  unrelated projects with similar names.
+- Canonical serialization is a compatibility contract. Changes to serialized
+  field order or model shapes require a version bump.

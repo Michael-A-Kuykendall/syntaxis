@@ -22,6 +22,11 @@ impact as you understand it. A proof-of-concept input file is ideal.
 This is a single-maintainer project. These are honest targets, not a contractual
 SLA. If you have not heard back in a week, send a follow-up — mail gets lost.
 
+The release safety corpus exercises inputs up to 128 KiB, including long,
+nested, malformed, and Unicode-heavy text. Larger callers should apply their
+own input-size limit before invoking the engine; unbounded document processing
+is not a supported contract.
+
 ## Supported versions
 
 The most recent release only. There are no backported security fixes before

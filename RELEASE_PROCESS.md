@@ -8,7 +8,7 @@ Three versions move independently and all three appear in serialized output:
 | --- | --- |
 | Engine (`Cargo.toml`) | any code change |
 | Rule pack (`resources/en/rulepack.manifest`) | any rule or artifact change |
-| CoNLL-U mapping (`conllu::MAPPING_VERSION`) | the Penn↔UD projection changes |
+| CoNLL-U mapping (`syntaxis::conllu::MAPPING_VERSION`) | the Penn↔UD projection changes |
 
 **A change to output bytes is a breaking change**, even with no API change.
 Consumers pin digests; that is the interface.
@@ -23,20 +23,18 @@ Consumers pin digests; that is the interface.
    changed. Credit reporters.
 5. **Regenerate fixture digests** if output changed, and eyeball the diff — an
    unexpected fixture diff means an unintended behaviour change.
-6. **Dry run.** `cargo publish --dry-run -p parser-core`, then each dependent
-   crate in order.
+6. **Dry run.** `cargo publish --dry-run` for the single `syntaxis` package.
 7. **Tag.** `git tag -s v0.1.0 -m "v0.1.0"` and push the tag.
-8. **Publish** in dependency order: `parser-core`, `english-rules`, `conllu`,
-   `engine-cli`. Each must be live on crates.io before the next.
+8. **Publish** the `syntaxis` package.
 9. **GitHub release.** Paste the changelog section. Attach nothing that was not
    built from the tag.
 
-## Publishing order matters
+## Publishing
 
-The crates path-depend on each other. Publishing out of order produces a
-version on crates.io that cannot resolve. If a mid-sequence publish fails, do
-not yank and retry the same version — bump the patch and go again. Yanked
-versions still occupy the number.
+The package contains the library modules and the `syntaxis` binary, so there is
+no inter-package publish order. If publishing fails, do not yank and retry the
+same version — bump the patch and go again. Yanked versions still occupy the
+number.
 
 ## Hotfixes
 

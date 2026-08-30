@@ -1,25 +1,35 @@
-[workspace]
-resolver = "2"
-members = [
-    "crates/parser-core",
-    "crates/english-rules",
-    "crates/conllu",
-    "crates/engine-cli",
-]
-
-[workspace.package]
+[package]
+name = "syntaxis"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.75"
 license = "Apache-2.0"
 repository = "https://github.com/Michael-A-Kuykendall/syntaxis"
 homepage = "https://github.com/Michael-A-Kuykendall/syntaxis"
+description = "Deterministic, offline English structural analysis."
 readme = "README.md"
+exclude = [
+    ".agents/**",
+    ".beads/**",
+    ".claude/**",
+    ".codex/**",
+    ".github/**",
+    ".serena/**",
+    "Cargo.toml.orig",
+]
 keywords = ["nlp", "english", "deterministic", "parser", "structural-analysis"]
 categories = ["text-processing", "parsing"]
 
-# Determinism contract: this workspace has no external dependencies at all.
-# Every dependency added later must be justified in docs/RESOURCES.md and must
-# not introduce network access, model weights, wall-clock, or RNG.
+[lib]
+name = "syntaxis"
+path = "src/lib.rs"
+
+[[bin]]
+name = "syntaxis"
+path = "src/bin/syntaxis.rs"
+
 [profile.release]
 overflow-checks = true
+
+[lints.rust]
+unsafe_code = "forbid"

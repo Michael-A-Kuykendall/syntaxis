@@ -3,29 +3,5 @@
 version = 3
 
 [[package]]
-name = "conllu"
-version = "0.1.0"
-dependencies = [
- "english-rules",
- "parser-core",
-]
-
-[[package]]
-name = "engine-cli"
-version = "0.1.0"
-dependencies = [
- "conllu",
- "english-rules",
- "parser-core",
-]
-
-[[package]]
-name = "english-rules"
-version = "0.1.0"
-dependencies = [
- "parser-core",
-]
-
-[[package]]
-name = "parser-core"
+name = "syntaxis"
 version = "0.1.0"

@@ -1,6 +1,6 @@
 # cargo-deny configuration.
 #
-# This workspace has zero dependencies, so today this file passes trivially.
+# This crate has zero dependencies, so today this file passes trivially.
 # It is committed anyway because it is a ratchet: the moment someone adds a
 # crate, CI answers the licence question automatically instead of six months
 # later during a legal review.
@@ -31,11 +31,6 @@ allow = [
 ]
 confidence-threshold = 0.95
 unused-allowed-license = "allow"
-
-[[licenses.exceptions]]
-# None. Add here only with a written justification in the commit message.
-name = "this-entry-is-a-placeholder"
-allow = []
 
 [bans]
 multiple-versions = "deny"

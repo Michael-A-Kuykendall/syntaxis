@@ -1,11 +1,9 @@
-![Syntaxis — deterministic English structural analysis](https://raw.githubusercontent.com/Michael-A-Kuykendall/syntaxis/main/assets/syntaxis--logo.png)
+![Syntaxis — deterministic English structural analysis](assets/syntaxis--logo.png)
 
 ![Trans rights](https://pride-badges.pony.workers.dev/static/v1?label=trans%20rights&stripeWidth=6&stripeColors=5BCEFA,F5A9B8,FFFFFF,F5A9B8,5BCEFA)
 ![LGBTQ+ friendly](https://pride-badges.pony.workers.dev/static/v1?label=lgbtq%2B%20friendly&stripeWidth=6&stripeColors=E40303,FF8C00,FFED00,008026,24408E,732982)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![CI](https://github.com/Michael-A-Kuykendall/syntaxis/workflows/CI/badge.svg)](https://github.com/Michael-A-Kuykendall/syntaxis/actions)
 [![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
-[![GitHub Stars](https://img.shields.io/github/stars/Michael-A-Kuykendall/syntaxis?style=social)](https://github.com/Michael-A-Kuykendall/syntaxis/stargazers)
 
 Deterministic, offline English structural analysis. Rust, **zero dependencies** —
 no model weights, no Python, no C++, no network, no wall-clock, no RNG.
@@ -16,24 +14,24 @@ emits a single, byte-for-byte reproducible result — with every fact traced bac
 to the rule that produced it. It is built to be **auditable**: same input, same
 rules, same bytes, every time.
 
-This is a pure-Rust workspace, built to work the same way on your machine, on a
+This is a pure-Rust crate, built to work the same way on your machine, on a
 server, and in a browser. No model weights. No runtime that needs to phone
 home. No hidden state that makes results irreproducible.
 
 ```
 cargo test                          # 80 tests, no network needed
-cargo run -p engine-cli -- "The cat are sleeping." # canonical JSON analysis
-cargo run -p engine-cli --example demo             # live tokenization / import / retraction
+cargo run -- "The cat are sleeping."              # canonical JSON analysis
+cargo run --example demo                          # live tokenization / import / retraction
 ```
 
 ## What's in the box
 
 | crate | contains |
 | --- | --- |
-| `parser-core` | data model, spans, provenance (support sets), fact graph, canonical JSON, SHA-256 |
-| `english-rules` | rule-pack loader, segmentation, tokenization, analysis pipeline |
-| `conllu` | strict UD import/export and the versioned Penn↔UD projection |
-| `engine-cli` | command-line front end |
+| `syntaxis::parser_core` | data model, spans, provenance, fact graph, canonical JSON, SHA-256 |
+| `syntaxis::english_rules` | rule-pack loader, segmentation, tokenization, analysis pipeline |
+| `syntaxis::conllu` | strict UD import/export and the versioned Penn↔UD projection |
+| `syntaxis` binary | command-line front end |
 
 `resources/en/` holds the versioned, checksummed reference artifacts.
 `fixtures/` holds hand-annotated gold data.

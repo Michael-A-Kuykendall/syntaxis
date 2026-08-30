@@ -13,23 +13,23 @@ cargo test --offline
 ## Layout
 
 ```
-crates/parser-core/     data model, spans, supports, fact graph, JSON, SHA-256
-crates/english-rules/   rule pack, normalization, segmentation, tokenization
-crates/conllu/          strict UD import/export, Penn<->UD projection
-crates/engine-cli/      command line front end
+src/parser_core/        data model, spans, supports, fact graph, JSON, SHA-256
+src/english_rules/      rule pack, normalization, segmentation, tokenization
+src/conllu/             strict UD import/export, Penn<->UD projection
+src/bin/syntaxis.rs     command line front end
 resources/en/           versioned, checksummed reference artifacts
 fixtures/               hand-annotated gold data
 docs/                   design notes, resource provenance, gate criteria
 ```
 
-`parser-core` contains **no English knowledge**. If you find yourself adding a
-word list or a language-specific rule to it, it belongs in `english-rules`.
+`parser_core` contains **no English knowledge**. If you find yourself adding a
+word list or a language-specific rule to it, it belongs in `english_rules`.
 
 ## Common tasks
 
 ```
 cargo test --offline                       # everything
-cargo test -p parser-core --offline        # one crate
+cargo test parser_core --offline            # core module tests
 cargo run --example demo                   # live tokenize/import/retract demo
 cargo clippy --all-targets -- -D warnings
 cargo fmt --check
@@ -64,8 +64,8 @@ make gate                                  # the full pre-release gate
 
 ## Changing the data model
 
-This is the expensive one. Changing a struct in `parser-core::model` or the
-field order in `parser-core::serialize` changes every consumer's bytes.
+This is the expensive one. Changing a struct in `parser_core::model` or the
+field order in `parser_core::serialize` changes every consumer's bytes.
 
 1. Bump `ANALYSIS_VERSION`.
 2. Update `serialize.rs` — field order there is the contract, not an
