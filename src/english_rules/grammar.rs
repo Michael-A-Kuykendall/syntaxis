@@ -432,6 +432,25 @@ mod tests {
     }
 
     #[test]
+    fn negation_placement_retracts_with_negation_arc() {
+        let mut analysis = analyze("They not sleep.", &pack());
+        let diagnostic = analysis
+            .diagnostics
+            .values()
+            .find(|item| item.message_key.as_str() == PLACEMENT_MESSAGE)
+            .unwrap()
+            .id;
+        let negation_arc = analysis
+            .arcs
+            .values()
+            .find(|arc| arc.relation == Relation::Neg)
+            .unwrap()
+            .id;
+        analysis.retract(&SourceRef::Arc(negation_arc));
+        assert!(!analysis.diagnostics.contains_key(&diagnostic));
+    }
+
+    #[test]
     fn coordination_agreement_uses_only_resolved_conj_arcs() {
         let mismatch = analyze("The cat and dogs sleep.", &pack());
         assert!(has_key(&mismatch, COORDINATION_MESSAGE));
@@ -450,6 +469,25 @@ mod tests {
             conj_arcs, 0,
             "shared-argument coordination must not be claimed as conj"
         );
+    }
+
+    #[test]
+    fn coordination_diagnostic_retracts_with_conj_arc() {
+        let mut analysis = analyze("The cat and dogs sleep.", &pack());
+        let diagnostic = analysis
+            .diagnostics
+            .values()
+            .find(|item| item.message_key.as_str() == COORDINATION_MESSAGE)
+            .unwrap()
+            .id;
+        let conj_arc = analysis
+            .arcs
+            .values()
+            .find(|arc| arc.relation == Relation::Conj)
+            .unwrap()
+            .id;
+        analysis.retract(&SourceRef::Arc(conj_arc));
+        assert!(!analysis.diagnostics.contains_key(&diagnostic));
     }
 
     #[test]
