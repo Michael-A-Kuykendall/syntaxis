@@ -260,6 +260,13 @@ supports = Pronoun subjects and finite forms whose person is uniquely known, suc
 blind_spots = Nouns without person features, and verb forms that do not uniquely encode person, including are.
 precision_target = not yet measured; set after the frozen-corpus baseline
 
+[rule.GRAMMAR.AGREEMENT.SUBJECT_VERB_PERSON.V1]
+stage = grammar
+description = Compare known subject and finite-verb person over resolved dependency supports.
+supports = First- and third-person subject/finite-verb agreement when both token analyses provide known person.
+blind_spots = Unknown-person nouns and pronouns, unresolved alternatives, and agreement without known morphology.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
 [rule.GRAMMAR.DETERMINER.ARTICLE_NUMBER.V1]
 stage = grammar
 description = Detect an indefinite singular article attached to a plural noun.

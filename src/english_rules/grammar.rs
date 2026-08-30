@@ -20,8 +20,6 @@ const COORDINATION_RULE: &str = "GRAMMAR.AGREEMENT.COORDINATION.V1";
 const COORDINATION_MESSAGE: &str = "GRAMMAR.AGREEMENT.COORDINATION";
 const PLACEMENT_RULE: &str = "GRAMMAR.PLACEMENT.NEGATION.V1";
 const PLACEMENT_MESSAGE: &str = "GRAMMAR.PLACEMENT.NEGATION";
-const TO_INFINITIVE_RULE: &str = "GRAMMAR.VERB_FORM.TO_INFINITIVE.V1";
-const TO_INFINITIVE_MESSAGE: &str = "GRAMMAR.VERB_FORM.TO_INFINITIVE";
 
 pub fn diagnose(analysis: &mut Analysis, pack: &RulePack) {
     let sentence_ids = analysis.document.sentences.clone();
@@ -145,32 +143,6 @@ fn diagnose_sentence(analysis: &mut Analysis, sentence: SentenceId, pack: &RuleP
         }
     }
 
-    for marker in accepted(&arcs).filter(|arc| arc.relation == Relation::Mark) {
-        let Some(head) = marker.head else { continue };
-        let Some(mark) = analysis.token_analyses.get(&marker.dependent) else {
-            continue;
-        };
-        let Some(verb) = analysis.token_analyses.get(&head) else {
-            continue;
-        };
-        if mark.pos != parser_core::model::Pos::TO || !verb.morphology.verb_form.is_known() {
-            continue;
-        }
-        if matches!(verb.morphology.verb_form, VerbForm::Ger | VerbForm::Part) {
-            add_diagnostic(
-                analysis,
-                pack,
-                sentence,
-                marker.dependent,
-                head,
-                DiagnosticKind::VerbForm,
-                TO_INFINITIVE_MESSAGE,
-                TO_INFINITIVE_RULE,
-                [marker.id],
-            );
-        }
-    }
-
     for negation in accepted(&arcs).filter(|arc| arc.relation == Relation::Neg) {
         let Some(head) = negation.head else { continue };
         let Some(surface) = analysis.surface_of(negation.dependent) else {
@@ -220,21 +192,15 @@ fn diagnose_sentence(analysis: &mut Analysis, sentence: SentenceId, pack: &RuleP
 }
 
 fn accepted(arcs: &[DependencyArc]) -> impl Iterator<Item = &DependencyArc> {
-    arcs.iter()
-        .filter(|arc| arc.status == ArcStatus::Accepted)
+    arcs.iter().filter(|arc| arc.status == ArcStatus::Accepted)
 }
 
 fn has_accepted_verbal_host(arcs: &[DependencyArc], head: TokenId) -> bool {
-    accepted(arcs).any(|arc| {
-        arc.head == Some(head) && matches!(arc.relation, Relation::Aux | Relation::Cop)
-    })
+    accepted(arcs)
+        .any(|arc| arc.head == Some(head) && matches!(arc.relation, Relation::Aux | Relation::Cop))
 }
 
-fn finite_head(
-    analysis: &Analysis,
-    arcs: &[DependencyArc],
-    head: TokenId,
-) -> Option<TokenId> {
+fn finite_head(analysis: &Analysis, arcs: &[DependencyArc], head: TokenId) -> Option<TokenId> {
     let head_analysis = analysis.token_analyses.get(&head)?;
     if head_analysis.morphology.number.is_known() || head_analysis.morphology.person.is_known() {
         return Some(head);
@@ -335,7 +301,6 @@ fn add_diagnostic<const N: usize>(
 mod tests {
     use super::*;
     use crate::pipeline::analyze;
-    use parser_core::model::Pos;
 
     fn pack() -> RulePack {
         RulePack::builtin().unwrap()
@@ -467,45 +432,6 @@ mod tests {
     }
 
     #[test]
-    fn to_infinitive_requires_a_non_finite_incompatible_form() {
-        assert!(pack().rule(TO_INFINITIVE_RULE).is_ok());
-
-        let error = analyze("They go to sleeping.", &pack());
-        assert!(has_key(&error, TO_INFINITIVE_MESSAGE));
-        let diagnostic = error
-            .diagnostics
-            .values()
-            .find(|item| item.message_key.as_str() == TO_INFINITIVE_MESSAGE)
-            .unwrap();
-        assert_eq!(diagnostic.kind, DiagnosticKind::VerbForm);
-        assert!(diagnostic
-            .support
-            .sources
-            .iter()
-            .any(|source| matches!(source, SourceRef::Arc(_))));
-
-        let clean = analyze("They go to sleep.", &pack());
-        assert!(!has_key(&clean, TO_INFINITIVE_MESSAGE));
-
-        let prepositional = analyze("They go to school.", &pack());
-        assert!(!has_key(&prepositional, TO_INFINITIVE_MESSAGE));
-        let to = prepositional
-            .tokens
-            .values()
-            .find(|token| token.normalized == "to")
-            .unwrap();
-        let to_arc = prepositional
-            .arcs
-            .values()
-            .find(|arc| arc.dependent == to.id)
-            .unwrap();
-        assert!(
-            to_arc.relation == Relation::Unsupported || to_arc.status != ArcStatus::Accepted,
-            "prepositional to must stay outside the infinitive contract"
-        );
-    }
-
-    #[test]
     fn coordination_agreement_uses_only_resolved_conj_arcs() {
         let mismatch = analyze("The cat and dogs sleep.", &pack());
         assert!(has_key(&mismatch, COORDINATION_MESSAGE));
@@ -553,18 +479,5 @@ mod tests {
             assert_eq!(first.to_canonical_json(), second.to_canonical_json());
             assert_eq!(first.digest(), second.digest());
         }
-    }
-
-    #[test]
-    fn to_marker_is_present_on_the_supported_infinitive_shape() {
-        let analysis = analyze("They go to sleep.", &pack());
-        assert!(analysis.arcs.values().any(|arc| {
-            arc.relation == Relation::Mark
-                && arc.status == ArcStatus::Accepted
-                && analysis
-                    .token_analyses
-                    .get(&arc.dependent)
-                    .is_some_and(|item| item.pos == Pos::TO)
-        }));
     }
 }
