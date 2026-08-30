@@ -7,9 +7,12 @@
 #![forbid(unsafe_code)]
 #![deny(rust_2018_idioms)]
 
+pub mod api;
 pub mod conllu;
 pub mod english_rules;
 pub mod parser_core;
+#[cfg(all(feature = "wasm", target_arch = "wasm32"))]
+pub mod wasm;
 
 pub use conllu::{export, export_with, import_str, ConlluError, ExportOptions, MAPPING_VERSION};
 pub use conllu::{export as conllu_export, import as conllu_import, mapping as conllu_mapping};

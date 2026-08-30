@@ -20,9 +20,20 @@ exclude = [
 keywords = ["nlp", "english", "deterministic", "parser", "structural-analysis"]
 categories = ["text-processing", "parsing"]
 
+[features]
+default = []
+wasm = ["dep:wasm-bindgen"]
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = { version = "0.2.105", optional = true }
+
+[target.'cfg(target_arch = "wasm32")'.dev-dependencies]
+wasm-bindgen-test = "0.3.50"
+
 [lib]
 name = "syntaxis"
 path = "src/lib.rs"
+crate-type = ["rlib", "cdylib"]
 
 [[bin]]
 name = "syntaxis"

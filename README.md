@@ -24,6 +24,20 @@ cargo run -- "The cat are sleeping."              # canonical JSON analysis
 cargo run --example demo                          # live tokenization / import / retraction
 ```
 
+## Browser API
+
+The optional `wasm` feature exposes the same canonical analysis contract to
+JavaScript through `wasm-bindgen`:
+
+```sh
+wasm-pack build --target web --features wasm
+```
+
+The generated module exports `analyze_json(text)`, `digest(text)`, and
+`import_conllu_json(input)`. Each returns a deterministic string or a
+deterministic error. Inputs are limited to 128 KiB; filesystem-based CLI
+options are not part of the browser API.
+
 ## What's in the box
 
 | crate | contains |
