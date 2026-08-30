@@ -11,10 +11,13 @@ description = "Deterministic, offline English structural analysis."
 readme = "README.md"
 exclude = [
     ".agents/**",
+    "AGENTS.md",
     ".beads/**",
     ".claude/**",
+    "CLAUDE.md",
     ".codex/**",
     ".github/**",
+    "review.html",
     ".serena/**",
     "Cargo.toml.orig",
 ]
