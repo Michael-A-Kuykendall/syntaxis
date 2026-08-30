@@ -35,8 +35,9 @@ The most recent release only. There are no backported security fixes before
 
 ## Scope
 
-This is an offline text-analysis library. It opens no sockets, spawns no
-processes, and reads no files it was not handed. The realistic threat model is
+This is an offline text-analysis library and CLI. The library opens no sockets,
+spawns no processes, and reads no files. The CLI can read a caller-selected
+CoNLL-U input file and writes results to stdout. The realistic threat model is
 **hostile input text**, so these are in scope:
 
 - Panics reachable from library APIs on any input, including malformed UTF-8
@@ -64,7 +65,8 @@ Those are ordinary bugs — file them as issues.
 ## Hardening notes
 
 - `#![forbid(unsafe_code)]` across the workspace.
-- Zero external dependencies, so there is no transitive supply chain.
+- The default native feature set has no runtime dependencies; the optional Wasm
+  feature uses the `wasm-bindgen` binding stack.
 - No network access, no filesystem access, no environment reads, no clock, no
   RNG anywhere in the analysis path.
 - Reference artifacts are embedded at build time and SHA-256 verified at load;

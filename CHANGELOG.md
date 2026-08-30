@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   `syntaxis` binary.
 - Added the checksummed English rule-pack artifacts to the package so builds do
   not depend on the repository checkout.
+- Added an optional `wasm` feature with `wasm-bindgen` exports for canonical JSON
+  analysis, digests, and strict CoNLL-U import.
 
 - Initial release-shaped API for deterministic, offline English structural
   analysis.
