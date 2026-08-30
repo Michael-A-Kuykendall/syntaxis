@@ -26,7 +26,6 @@ compiles; it is complete when its acceptance criteria in
 - [x] Initial agreement, determiner, verb-form, and negation-placement rules
 - [x] Known-person subject/finite agreement when both persons are known
 - [x] Do-support as an accepted auxiliary host for `not`
-- [x] One `to` + gerund/participle compatibility diagnostic over accepted `mark`
 - [x] Coordination number agreement only over resolved `conj` arcs
 - [x] Grammar diagnostics kept separate from spelling, capitalization, and style
 - [x] Construction-focused precision, recall, and clean-text results on frozen data
@@ -50,6 +49,8 @@ Deferred follow-up from the first-slice expansion:
 - Person on ambiguous verb forms other than `are` (`have`, `do`, `was`)
 - Clause-level and shared-argument coordination
 - Prepositional `to` vs infinitival `to` beyond the current unsupported remainder
+- Infinitival `to` diagnostics remain deferred until the parser emits a resolved
+  `mark` relation for the supported construction
 - Broadening the 500-case gate to person, placement, or infinitive kinds
 
 ## Explicit non-goals
