@@ -1,9 +1,8 @@
 # cargo-deny configuration.
 #
-# This crate has zero dependencies, so today this file passes trivially.
-# It is committed anyway because it is a ratchet: the moment someone adds a
-# crate, CI answers the licence question automatically instead of six months
-# later during a legal review.
+# The default native feature set has no runtime dependencies. The optional Wasm
+# feature and its tests use a reviewed binding stack. This file is committed as
+# a ratchet: any future dependency change is checked by CI immediately.
 #
 #   cargo install cargo-deny && cargo deny check
 

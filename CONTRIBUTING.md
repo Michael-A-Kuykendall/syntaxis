@@ -47,9 +47,10 @@ Closing your PR is not a judgment of the work. It is how the project operates.
 
 ## The dependency rule
 
-**This workspace has zero external dependencies and that is a feature, not an
-accident.** Determinism is unverifiable if it depends on transitive crates the
-project does not control.
+**The default native feature set has no runtime dependencies and that is a
+feature, not an accident.** The optional Wasm feature uses the reviewed
+wasm-bindgen stack. Determinism is unverifiable if unreviewed transitive crates
+enter the analysis contract.
 
 A PR adding a dependency will be closed regardless of merit. If you believe one
 is unavoidable, open an issue and make the case: what it does, why it cannot be

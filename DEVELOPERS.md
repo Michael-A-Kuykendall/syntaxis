@@ -2,8 +2,9 @@
 
 ## Requirements
 
-Rust 1.75 or newer. That is the entire toolchain requirement. No C++ compiler,
-no Python, no protoc, no network access after clone.
+Rust 1.75 or newer is required for native development. Browser/Wasm packaging
+also requires the wasm32 target and `wasm-pack`; no C++ compiler, Python, or
+protoc is required.
 
 ```
 cargo build --offline
@@ -33,7 +34,7 @@ cargo test parser_core --offline            # core module tests
 cargo run --example demo                   # live tokenize/import/retract demo
 cargo clippy --all-targets -- -D warnings
 cargo fmt --check
-cargo deny check                           # licences and bans (needs cargo-deny)
+cargo deny check                           # licences and bans (needs pinned cargo-deny)
 make gate                                  # the full pre-release gate
 ```
 
