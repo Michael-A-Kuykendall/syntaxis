@@ -7,9 +7,11 @@ This product includes software developed by Michael A. Kuykendall.
 Third-party code
 --------------------------------------------------------------------------------
 
-None. This workspace has no external dependencies. Everything under crates/ is
-original work, including the SHA-256 implementation in
-crates/parser-core/src/hash.rs (written against the FIPS 180-4 specification and
+The default native build has no runtime dependencies. The optional `wasm`
+feature uses the `wasm-bindgen` family of crates for JavaScript bindings; their
+licence notices are supplied by Cargo metadata and the generated package.
+Everything under src/ is original work, including the SHA-256 implementation in
+src/parser_core/hash.rs (written against the FIPS 180-4 specification and
 validated against its published test vectors).
 
 --------------------------------------------------------------------------------

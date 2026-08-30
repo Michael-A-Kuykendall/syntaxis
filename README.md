@@ -5,8 +5,9 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
 
-Deterministic, offline English structural analysis. Rust, **zero dependencies** —
-no model weights, no Python, no C++, no network, no wall-clock, no RNG.
+Deterministic, offline English structural analysis. Rust, with a **zero-runtime-
+dependency native build** — no model weights, no Python, no C++, no network, no
+wall-clock, no RNG.
 
 Syntaxis is a **deterministic English structural-analysis engine**. It tokenizes,
 segments, and lays out the grammatical structure of an English sentence and

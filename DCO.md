@@ -43,4 +43,4 @@ A CLA asks contributors to assign or license rights to a legal entity. There is
 no entity here. The DCO records that a contributor had the right to send what
 they sent, which is the actual thing this project needs to be able to prove —
 especially for linguistic reference data, where the provenance question is
-"where did this word list come from" and the honest answer must be documented.
+"where did this word list come from" and the source evidence must be documented.

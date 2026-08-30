@@ -19,8 +19,9 @@ impact as you understand it. A proof-of-concept input file is ideal.
 | Initial assessment | 10 business days |
 | Fix or documented mitigation | depends on severity; you will be kept informed |
 
-This is a single-maintainer project. These are honest targets, not a contractual
-SLA. If you have not heard back in a week, send a follow-up — mail gets lost.
+This is a single-maintainer project. These are response targets, not a
+contractual SLA. If you have not heard back in a week, send a follow-up — mail
+gets lost.
 
 The release safety corpus exercises inputs up to 128 KiB, including long,
 nested, malformed, and Unicode-heavy text. Larger callers should apply their

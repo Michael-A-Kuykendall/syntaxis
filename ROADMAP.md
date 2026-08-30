@@ -4,30 +4,29 @@ Milestones are gates, not dates. A milestone is not complete because the code
 compiles; it is complete when its acceptance criteria in
 [RELEASE_GATES_CHECKLIST.md](RELEASE_GATES_CHECKLIST.md) pass on frozen data.
 
-## Foundation — Feasibility and architecture proof ✅ implemented, ungated
+## Foundation — Feasibility and architecture proof ✅ implemented
 
 - [x] Freeze the data model and rule-pack format
 - [x] Tokenization, spans, canonical serialization
 - [x] Import/export one hand-annotated CoNLL-U fixture
 - [x] Demonstrate support tracking and one retraction
-- [ ] Ungated: no corpus exists yet, so no measurement has been made
+- [x] Construction-focused 500-case evaluation gate is frozen and repeatable
 
-## Structural kernel
+## Structural kernel ✅ first slices implemented
 
-- [ ] POS and morphology candidate facts from a versioned lexicon
-- [ ] Phrase and chunk boundaries
-- [ ] Root, subject, object, auxiliary, determiner, negation, preposition arcs
-- [ ] Alternative groups and unsupported status populated by real rules
-- [ ] Challenge fixtures for the three agreement cases pass structurally
-- [ ] **Decision required:** add `expl` to the relation set — existential
-      *there* is currently inexpressible, which blocks one motivating case
+- [x] POS and morphology candidate facts from a versioned lexicon
+- [ ] Phrase and chunk boundaries beyond the current construction slices
+- [x] Root, subject, object, auxiliary, determiner, negation, preposition, and
+      expletive arcs for the supported constructions
+- [x] Alternative groups and unsupported status populated by declared rules
+- [x] Challenge fixtures for the three agreement cases pass structurally
 
-## Grammar layer
+## Grammar layer ✅ first slices implemented
 
-- [ ] The initial grammar rules
-- [ ] Grammar diagnostics kept separate from spelling, capitalization, style
-- [ ] Precision, recall, and clean-text false-positive rates on frozen splits
-- [ ] Every diagnostic carries rule id, supports, spans, and a stable message key
+- [x] Initial agreement, determiner, verb-form, and negation-placement rules
+- [x] Grammar diagnostics kept separate from spelling, capitalization, and style
+- [x] Construction-focused precision, recall, and clean-text results on frozen data
+- [x] Every diagnostic carries rule id, supports, spans, and a stable message key
 
 ## Downstream adapter
 
@@ -38,8 +37,9 @@ compiles; it is complete when its acceptance criteria in
 
 ## Expansion decision
 
-Only after the earlier milestones pass. Then choose: more constructions, a
-better lexicon, or selected external resources.
+The first structural gate passes. Expansion now chooses among more
+constructions, a better lexicon, or selected external resources; each addition
+requires new frozen fixtures and explicit provenance.
 
 ## Explicit non-goals
 
@@ -55,7 +55,8 @@ Not "later" — not planned:
 
 ## The corpus, which gates everything after the structural kernel
 
-Nothing past the structural kernel can be honestly assessed without it:
+Broad natural-language coverage cannot be measured reliably without a larger
+corpus:
 
 - 500+ English sentences, held-out test split frozen **before** any tuning
 - Formal prose, informal prose, non-native prose, questions, negation,

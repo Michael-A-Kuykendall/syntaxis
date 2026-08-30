@@ -12,16 +12,16 @@ gate whose failure "is only a fixture".
 - [ ] `cargo clippy --all-targets -- -D warnings` clean
 - [ ] `cargo fmt --check` clean
 - [ ] `cargo deny check` clean
-- [ ] Dependency count is still **zero** (`cargo tree --depth 1`)
-- [ ] Builds on Linux, macOS, and Windows
-- [ ] `wasm32-unknown-unknown` target still builds
+- [ ] Default native dependency surface is reviewed (`cargo tree --depth 1`)
+- [ ] Builds on every claimed native platform, or the claim is removed
+- [ ] `wasm32-unknown-unknown` target and the `wasm` API feature build
 
 ## Gate 2 — Determinism
 
 - [ ] Serialized output byte-identical across repeated runs
 - [ ] Byte-identical across platforms for the fixture corpus
 - [ ] No `HashMap`/`HashSet` in any path reaching output
-      (`grep -rn "HashMap\|HashSet" crates/*/src` and justify each hit)
+      (`grep -rn "HashMap\|HashSet" src` and justify each hit)
 - [ ] No clock, RNG, env read, network, or filesystem access in the analysis
   path
 - [ ] Digest of every fixture matches the recorded value, or the change is in
@@ -36,7 +36,7 @@ gate whose failure "is only a fixture".
 - [ ] `Analysis::validate` returns empty for every fixture
 - [ ] Tokenizer reconstruction invariant holds across the whole corpus
 
-## Gate 4 — Honesty
+## Gate 4 — Contract and evidence
 
 This gate has no automated substitute. Read the diff.
 
@@ -64,7 +64,7 @@ This gate has no automated substitute. Read the diff.
     their content changed
 - [ ] `CHANGELOG.md` entry names which of the three versions moved
 - [ ] Breaking output changes flagged as breaking, even with no API change
-- [ ] `README.md` "Not done yet" section still true
+- [ ] `README.md` current-scope and browser API sections still true
 - [ ] `ROADMAP.md` milestone boxes reflect reality
 - [ ] `cargo publish --dry-run` clean for the `syntaxis` package
 
