@@ -62,7 +62,7 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 
 ```bash
 cargo build --offline               # builds all crates offline (zero deps)
-cargo test --offline                # 80 tests, no network needed
+cargo test --offline                # full test suite, no network needed
 cargo run -- "The cat are sleeping."                # canonical JSON analysis
 cargo run --example demo                            # live tokenization / import / retraction
 cargo clippy --all-targets -- -D warnings            # lint

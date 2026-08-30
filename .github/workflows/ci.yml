@@ -22,15 +22,6 @@ jobs:
           rustup component add clippy rustfmt --toolchain "${{ matrix.rust }}"
           rustup default "${{ matrix.rust }}"
 
-      - name: Cache cargo registry
-        uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4.1.2
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-
       - name: Build (offline)
         run: cargo build --offline --release
 

@@ -13,8 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Added the checksummed English rule-pack artifacts to the package so builds do
   not depend on the repository checkout.
 
-## 0.1.0
-
 - Initial release-shaped API for deterministic, offline English structural
   analysis.
 - The crate name is intentionally `syntaxis`; the Rust package and command-line

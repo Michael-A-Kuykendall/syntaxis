@@ -5,7 +5,9 @@
 
 # Called out individually because a change here breaks downstream consumers
 # silently rather than loudly.
-/crates/parser-core/    @Michael-A-Kuykendall
+/src/parser_core/       @Michael-A-Kuykendall
+/src/english_rules/     @Michael-A-Kuykendall
+/src/conllu/            @Michael-A-Kuykendall
 /resources/             @Michael-A-Kuykendall
 /fixtures/              @Michael-A-Kuykendall
 /deny.toml              @Michael-A-Kuykendall

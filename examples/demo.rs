@@ -23,8 +23,8 @@ fn main() {
     println!("  digest: {}", &a.digest()[..16]);
 
     println!("\n== gold fixture import ==");
-    let fixture = std::fs::read_to_string("fixtures/challenge_agreement.conllu").unwrap();
-    let mut g = import_str(&fixture, &pack.id).unwrap();
+    let fixture = include_str!("../fixtures/challenge_agreement.conllu");
+    let mut g = import_str(fixture, &pack.id).unwrap();
     println!(
         "  sentences {} tokens {} arcs {}",
         g.sentences.len(),

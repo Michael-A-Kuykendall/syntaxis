@@ -19,7 +19,7 @@ server, and in a browser. No model weights. No runtime that needs to phone
 home. No hidden state that makes results irreproducible.
 
 ```
-cargo test                          # 80 tests, no network needed
+cargo test                          # full test suite, no network needed
 cargo run -- "The cat are sleeping."              # canonical JSON analysis
 cargo run --example demo                          # live tokenization / import / retraction
 ```
@@ -96,7 +96,8 @@ than claimed as a feature:
   outside its declared construction set;
 - full grammar coverage beyond agreement, determiner, verb-form, and
   negation-placement diagnostics;
-- the 500-sentence evaluation corpus with measured thresholds;
+- natural-language coverage beyond the construction-focused 500-case
+  evaluation gate;
 - NFC/NFD normalization, which needs either a dependency or a large embedded
   table, recorded as a known gap.
 
