@@ -250,7 +250,14 @@ precision_target = n/a
 stage = grammar
 description = Compare known subject and finite-verb number over resolved dependency supports.
 supports = Simple subject-verb agreement, existential copular agreement, and each/every agreement.
-blind_spots = Person agreement, agreement through unresolved alternatives, and constructions without known morphology.
+blind_spots = Agreement through unresolved alternatives, and constructions without known morphology.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.GRAMMAR.AGREEMENT.SUBJECT_VERB_PERSON.V1]
+stage = grammar
+description = Compare known subject and finite-verb person over accepted subject arcs.
+supports = Pronoun subjects and finite forms whose person is uniquely known, such as I vs is.
+blind_spots = Nouns without person features, and verb forms that do not uniquely encode person, including are.
 precision_target = not yet measured; set after the frozen-corpus baseline
 
 [rule.GRAMMAR.DETERMINER.ARTICLE_NUMBER.V1]
@@ -263,22 +270,29 @@ precision_target = not yet measured; set after the frozen-corpus baseline
 [rule.GRAMMAR.VERB_FORM.HAVE_PARTICIPLE.V1]
 stage = grammar
 description = Require a participle after the auxiliary have in the bounded verb chain.
-supports = Basic have plus finite or participial verb chains.
-blind_spots = Perfect constructions with unresolved lexical ambiguity.
+supports = Basic have plus finite or participial verb chains where verb form is known.
+blind_spots = Perfect constructions with unresolved lexical ambiguity or unknown verb form.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.GRAMMAR.VERB_FORM.TO_INFINITIVE.V1]
+stage = grammar
+description = Flag an accepted infinitival to marker whose verbal head has a known gerund or participle form.
+supports = to plus a following verb attached by an accepted mark relation.
+blind_spots = Prepositional to, unknown verb form after to, and xcomp/control constructions the parser does not attach.
 precision_target = not yet measured; set after the frozen-corpus baseline
 
 [rule.GRAMMAR.PLACEMENT.NEGATION.V1]
 stage = grammar
-description = Flag negation when the bounded structure provides no auxiliary host.
-supports = Explicit not/never negation arcs in simple clauses.
-blind_spots = Do-support insertion and dialectal negation.
+description = Flag not when the clause head has no accepted auxiliary or copula host.
+supports = Accepted not/neg arcs whose head has no accepted aux or cop dependent.
+blind_spots = never without an auxiliary, dialectal negation, and do-support insertion as a rewrite.
 precision_target = not yet measured; set after the frozen-corpus baseline
 
 [rule.GRAMMAR.AGREEMENT.COORDINATION.V1]
 stage = grammar
 description = Compare known number features across resolved coordinated nominals.
-supports = Coordinated nominal agreement where a conj arc is available.
-blind_spots = Shared arguments and coordination scope.
+supports = Coordinated nominal agreement where an accepted conj arc is available.
+blind_spots = Shared arguments, clause coordination, and coordination scope.
 precision_target = not yet measured; set after the frozen-corpus baseline
 
 [rule.POS.LEXICAL.V1]
