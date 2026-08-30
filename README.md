@@ -39,6 +39,9 @@ The generated module exports `analyze_json(text)`, `digest(text)`, and
 deterministic error. Inputs are limited to 128 KiB; filesystem-based CLI
 options are not part of the browser API.
 
+See [the capability matrix](docs/CAPABILITY_MATRIX.md) for the supported
+construction boundary, evidence, and explicit non-goals.
+
 ## What's in the box
 
 | crate | contains |
