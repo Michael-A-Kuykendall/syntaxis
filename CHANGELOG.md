@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
+- Declared and tested `GRAMMAR.AGREEMENT.SUBJECT_VERB_PERSON.V1` for known-person
+  subject/finite mismatches. Unknown person is left silent.
+- Narrowed negation placement so an accepted `do` auxiliary is a host for `not`,
+  and so `never` is not treated as a hostless error.
+- Added `GRAMMAR.VERB_FORM.TO_INFINITIVE.V1` for an accepted `to` marker whose
+  verbal head has a known gerund or participle form.
+- Added coordination fixtures that require a resolved `conj` arc and leave
+  shared-argument coordination unclaimed.
+- Live morphology for `are` no longer claims `Person=3`, because that form is
+  not unique to third person. The CoNLL-U gold fixture is unchanged. No
+  `analysis_version`, rule-pack version, or mapping-version bump: the serialized
+  model shape is the same.
 - Consolidated the implementation into one publishable `syntaxis` package with
   `parser_core`, `english_rules`, and `conllu` library modules plus the
   `syntaxis` binary.
