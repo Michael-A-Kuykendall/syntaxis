@@ -28,7 +28,7 @@ pipelines that need reproducible and inspectable English structure.
 | Number agreement diagnostics | Supported first grammar slice | `GRAMMAR.AGREEMENT.SUBJECT_VERB.V1`; evaluation gate |
 | Person agreement diagnostics | Supported when both persons are known | `GRAMMAR.AGREEMENT.SUBJECT_VERB_PERSON.V1` |
 | Determiner diagnostics | Supported `a/an` plus plural noun case | `GRAMMAR.DETERMINER.ARTICLE_NUMBER.V1` |
-| Verb-form diagnostics | Supported bounded `have`+participle case | `GRAMMAR.VERB_FORM.HAVE_PARTICIPLE.V1` |
+| Verb-form diagnostics | Supported bounded `have`+participle and infinitival-`to` cases | `GRAMMAR.VERB_FORM.HAVE_PARTICIPLE.V1`; `GRAMMAR.VERB_FORM.TO_INFINITIVE.V1` |
 | Negation-placement diagnostics | Supported hostless `not` when no accepted aux/cop host exists | `GRAMMAR.PLACEMENT.NEGATION.V1` |
 | Coordination diagnostics | Supported when a resolved `conj` arc exists | `GRAMMAR.AGREEMENT.COORDINATION.V1` |
 | Provenance and support tracking | Supported on derived facts | `src/parser_core/support.rs`; integration tests |

@@ -22,6 +22,7 @@ const CASE_RULE: &str = "ATTACH.CASE.V1";
 const NMOD_RULE: &str = "ATTACH.NMOD.V1";
 const OBJECT_RULE: &str = "ATTACH.OBJECT.V1";
 const MODIFIER_RULE: &str = "ATTACH.MODIFIER.V1";
+const TO_MARK_RULE: &str = "ATTACH.TO_MARK.V1";
 const COORD_RULE: &str = "ATTACH.COORDINATION.V1";
 const PUNCT_RULE: &str = "ATTACH.PUNCTUATION.V1";
 const UNSUPPORTED_RULE: &str = "ATTACH.UNSUPPORTED.V1";
@@ -136,9 +137,14 @@ fn parse_sentence(analysis: &mut Analysis, sentence_id: SentenceId, pack: &RuleP
                 analysis
                     .token_analyses
                     .get(&candidate.id)
-                    .is_some_and(|candidate| matches!(candidate.pos, Pos::VB | Pos::VBP | Pos::VBZ))
+                    .is_some_and(|candidate| {
+                        matches!(
+                            candidate.pos,
+                            Pos::VB | Pos::VBG | Pos::VBN | Pos::VBP | Pos::VBZ
+                        )
+                    })
             }) {
-                (Some(verb.id), Relation::Mark, MODIFIER_RULE)
+                (Some(verb.id), Relation::Mark, TO_MARK_RULE)
             } else {
                 (root_id, Relation::Unsupported, UNSUPPORTED_RULE)
             }
@@ -359,5 +365,26 @@ mod tests {
                 .sources
                 .contains(&SourceRef::TokenAnalysis(arc.dependent)));
         }
+    }
+
+    #[test]
+    fn infinitival_to_marks_a_known_nonfinite_verb() {
+        let pack = RulePack::builtin().unwrap();
+        let analysis = analyze("They go to sleeping.", &pack);
+        let marker = analysis
+            .arcs
+            .values()
+            .find(|arc| arc.relation == Relation::Mark)
+            .unwrap();
+        assert_eq!(marker.status, ArcStatus::Accepted);
+        assert_eq!(marker.support.rule.as_str(), TO_MARK_RULE);
+        assert!(marker
+            .support
+            .sources
+            .contains(&SourceRef::TokenAnalysis(marker.dependent)));
+        assert!(marker
+            .support
+            .sources
+            .contains(&SourceRef::TokenAnalysis(marker.head.unwrap())));
     }
 }

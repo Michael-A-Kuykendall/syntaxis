@@ -20,6 +20,8 @@ const COORDINATION_RULE: &str = "GRAMMAR.AGREEMENT.COORDINATION.V1";
 const COORDINATION_MESSAGE: &str = "GRAMMAR.AGREEMENT.COORDINATION";
 const PLACEMENT_RULE: &str = "GRAMMAR.PLACEMENT.NEGATION.V1";
 const PLACEMENT_MESSAGE: &str = "GRAMMAR.PLACEMENT.NEGATION";
+const TO_INFINITIVE_RULE: &str = "GRAMMAR.VERB_FORM.TO_INFINITIVE.V1";
+const TO_INFINITIVE_MESSAGE: &str = "GRAMMAR.VERB_FORM.TO_INFINITIVE";
 
 pub fn diagnose(analysis: &mut Analysis, pack: &RulePack) {
     let sentence_ids = analysis.document.sentences.clone();
@@ -167,6 +169,32 @@ fn diagnose_sentence(analysis: &mut Analysis, sentence: SentenceId, pack: &RuleP
             PLACEMENT_RULE,
             [negation.id],
         );
+    }
+
+    for marker in accepted(&arcs).filter(|arc| arc.relation == Relation::Mark) {
+        let Some(head) = marker.head else { continue };
+        let Some(mark) = analysis.token_analyses.get(&marker.dependent) else {
+            continue;
+        };
+        let Some(verb) = analysis.token_analyses.get(&head) else {
+            continue;
+        };
+        if mark.pos != parser_core::model::Pos::TO || !verb.morphology.verb_form.is_known() {
+            continue;
+        }
+        if matches!(verb.morphology.verb_form, VerbForm::Ger | VerbForm::Part) {
+            add_diagnostic(
+                analysis,
+                pack,
+                sentence,
+                marker.dependent,
+                head,
+                DiagnosticKind::VerbForm,
+                TO_INFINITIVE_MESSAGE,
+                TO_INFINITIVE_RULE,
+                [marker.id],
+            );
+        }
     }
 
     for coordination in accepted(&arcs).filter(|arc| arc.relation == Relation::Conj) {
@@ -451,6 +479,31 @@ mod tests {
             .id;
         analysis.retract(&SourceRef::Arc(negation_arc));
         assert!(!analysis.diagnostics.contains_key(&diagnostic));
+    }
+
+    #[test]
+    fn infinitive_diagnostic_requires_the_accepted_to_mark() {
+        assert!(pack().rule(TO_INFINITIVE_RULE).is_ok());
+        let error = analyze("They go to sleeping.", &pack());
+        assert!(has_key(&error, TO_INFINITIVE_MESSAGE));
+        let clean = analyze("They go to school.", &pack());
+        assert!(!has_key(&clean, TO_INFINITIVE_MESSAGE));
+
+        let mut retractable = analyze("They go to sleeping.", &pack());
+        let diagnostic = retractable
+            .diagnostics
+            .values()
+            .find(|item| item.message_key.as_str() == TO_INFINITIVE_MESSAGE)
+            .unwrap()
+            .id;
+        let marker = retractable
+            .arcs
+            .values()
+            .find(|arc| arc.relation == Relation::Mark)
+            .unwrap()
+            .id;
+        retractable.retract(&SourceRef::Arc(marker));
+        assert!(!retractable.diagnostics.contains_key(&diagnostic));
     }
 
     #[test]

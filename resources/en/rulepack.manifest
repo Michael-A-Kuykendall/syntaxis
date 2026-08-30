@@ -225,6 +225,13 @@ supports = Basic negation, adverbial, and noun-modifying adjective positions.
 blind_spots = Scope and attachment ambiguity.
 precision_target = not yet measured; set after the frozen-corpus baseline
 
+[rule.ATTACH.TO_MARK.V1]
+stage = attach
+description = Attach infinitival to as a mark to a following known verbal head.
+supports = to followed by a supported verb-form token, including malformed non-finite forms needed by grammar diagnostics.
+blind_spots = Prepositional to, unresolved attachment, and infinitival complements outside the bounded token window.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
 [rule.ATTACH.COORDINATION.V1]
 stage = attach
 description = Attach a coordinating conjunction to the selected clause head.
@@ -272,6 +279,13 @@ stage = grammar
 description = Require a participle after the auxiliary have in the bounded verb chain.
 supports = Basic have plus finite or participial verb chains where verb form is known.
 blind_spots = Perfect constructions with unresolved lexical ambiguity or unknown verb form.
+precision_target = not yet measured; set after the frozen-corpus baseline
+
+[rule.GRAMMAR.VERB_FORM.TO_INFINITIVE.V1]
+stage = grammar
+description = Flag an accepted infinitival to marker whose verbal head has a known gerund or participle form.
+supports = to plus a following verb attached by an accepted mark relation.
+blind_spots = Prepositional to, unknown verb form after to, and infinitival complements outside the bounded token window.
 precision_target = not yet measured; set after the frozen-corpus baseline
 
 [rule.GRAMMAR.PLACEMENT.NEGATION.V1]
