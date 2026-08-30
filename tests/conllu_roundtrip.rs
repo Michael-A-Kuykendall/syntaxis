@@ -83,3 +83,10 @@ fn fixture_digest_matches_recorded_value() {
     let analysis = import_str(FIXTURE, &pack()).unwrap();
     assert_eq!(analysis.digest(), FIXTURE_DIGEST);
 }
+
+#[test]
+fn simple_sentence_with_terminal_punctuation_imports() {
+    let input = "# sent_id = 1\n# text = Cats sleep.\n1\tCats\tcat\tNOUN\tNN\tNumber=Plur\t2\tnsubj\t_\t_\n2\tsleep\tsleep\tVERB\tVBP\t_\t0\troot\t_\tSpaceAfter=No\n3\t.\t.\tPUNCT\t.\t_\t2\tpunct\t_\t_\n\n";
+    let analysis = import_str(input, &pack()).unwrap();
+    assert_eq!(export(&analysis), input);
+}
